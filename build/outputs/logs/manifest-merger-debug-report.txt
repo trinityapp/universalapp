@@ -1,0 +1,67 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+	package
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:3:5-39
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:1-18:12
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:5:5-16:19
+	android:supportsRtl
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:8:9-35
+	android:label
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:7:9-41
+	android:allowBackup
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:9:9-40
+activity#com.trinity.dynamicforms.Activity.ViewPagerForms
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:10:9-11:20
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:10:19-58
+activity#com.trinity.dynamicforms.Activity.SubCategoryActivity
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:12:9-66
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:12:19-63
+activity#com.trinity.dynamicforms.DetailsActivity.URLActivity
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:13:9-64
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:13:19-62
+activity#com.trinity.dynamicforms.DetailsActivity.ImageActivity
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:14:9-66
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:14:19-64
+activity#com.trinity.dynamicforms.DetailsActivity.VideoLandscapeActivity
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:15:9-75
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml:15:19-73
+uses-sdk
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml
+		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/dynamicFormlibrary/src/main/AndroidManifest.xml

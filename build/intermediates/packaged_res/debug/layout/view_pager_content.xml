@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:id="@+id/scrollViewLayout"-->
+<!--            >-->
+            <LinearLayout
+                android:id="@+id/lineView"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:background="@color/newColor"
+                />
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/scrollView"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:paddingBottom="10dp"
+                    android:elevation="5dp"
+                    android:layout_below="@+id/lineView"
+                    android:background="@android:color/white"
+                    >
+
+                        <LinearLayout
+                            android:id="@+id/dynamicView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="10dp"
+                            />
+                </ScrollView>
+<!--        </LinearLayout>-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/bottomLayout"
+            >
+
+            <Button
+                android:id="@+id/prev"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/prev"
+                android:gravity="center"
+                android:text="Prev"
+                android:textColor="@color/newColor" />
+<!--                    android:stateListAnimator="@null"-->
+<!--                    />-->
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/transparent"
+                android:drawableRight="@drawable/next"
+                android:gravity="center"
+                android:text="Next"
+                android:textColor="@color/newColor" />
+        </RelativeLayout>
+</RelativeLayout>

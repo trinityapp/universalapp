@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:id="@+id/signLin"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_marginRight="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:background="@drawable/edittext_border_layout"
+    android:layout_height="@dimen/_100sdp">
+    <RelativeLayout
+        android:id="@+id/sinRlin"
+        android:layout_width="match_parent"
+        android:background="@drawable/edittext_border_layout"
+        android:layout_height="match_parent"></RelativeLayout>
+    <ImageView
+        android:id="@+id/cross"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/cross"/>
+</RelativeLayout>
+
+</LinearLayout>

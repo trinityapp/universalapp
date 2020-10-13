@@ -1,29 +1,35 @@
-# README #
+# Tutorial #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This Library will help you to add a fragment to your existing app and just needs a Frame Layout to implement it.
 
-### What is this repository for? ###
+### What does it consists? ###
+* It consists of lists of Menu and N number submenus.   
+* It consists of dynamic form which will create forms acording to your need.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
+* Import this Repository in your Sourcetree and add as Submodule and save it as DynamicForms.
+* Open the project in which the library is imported and add this line in the settings.gradle: 
+```
+include ':DynamicForms'
+```
+* Open build.gradle(module:app), and add the folowing line:
+```
+implementation project(':DynamicForms')
+```
+* Create a Frame Layout in xml file:
+```
+ <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"/>
+```
+* Add this line in the Activity class:
+```
+new DynamicFormHelper(MainActivity.this, R.id.container, Base_url, emp_id, role_id, did);
+```
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Mompi Devi

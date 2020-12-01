@@ -68,6 +68,7 @@ id locpic
 id match
 id not_scannable
 id prev
+id pullToRefresh
 id qrCode_Edit
 id radioGroupBarCode
 id ratingBar
@@ -92,6 +93,7 @@ id urlButton
 id videoView
 id viewpager
 id webView
+layout activity_category
 layout activity_image
 layout activity_sub_category
 layout activity_url
@@ -131,3 +133,5 @@ string app_name
 style AppTheme
 style MySeekBarTheme
 style Spinner
+xml network_security_config
+xml provider_paths

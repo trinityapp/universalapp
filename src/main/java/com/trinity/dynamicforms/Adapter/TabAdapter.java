@@ -460,7 +460,7 @@ public class TabAdapter extends PagerAdapter {
 
     public View setTabView(TabLayout tabLayout, int position) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.custom_tab, tabLayout, false);
+                .inflate(R.layout.custom_lottie_tab, tabLayout, false);
         this.tablayout = tabLayout;
         TextView title = (TextView) view.findViewById(R.id.stepLabel);
         LottieAnimationView icon = (LottieAnimationView) view.findViewById(R.id.circle);

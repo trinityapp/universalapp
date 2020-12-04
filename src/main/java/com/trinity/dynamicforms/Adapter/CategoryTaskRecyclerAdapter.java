@@ -24,6 +24,7 @@ import com.trinity.dynamicforms.Utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -37,6 +38,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
     OnShareClickedListener mCallback;
     Context context;
     List<MenuDetailModel> menuList;
+    List<MenuDetailModel> menuListSearch;
     ArrayList<String> urls = new ArrayList<String>();
     private static final long CLICK_TIME_INTERVAL = 300;
     Handler handler;
@@ -47,6 +49,8 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
     public CategoryTaskRecyclerAdapter(Context context, List<MenuDetailModel> menuList, Handler handler ) {
         this.context = context;
         this.menuList=menuList;
+        this.menuListSearch = new ArrayList<MenuDetailModel>();
+        this.menuListSearch.addAll(menuList);
         this.handler = handler;
     }
 
@@ -63,7 +67,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
 
     @Override
     public void onBindViewHolder(final CategoryTaskRecyclerAdapter.MyViewHolder holder, final int position) {
-        final MenuDetailModel assignedModel = menuList.get(position);
+        final MenuDetailModel assignedModel = menuListSearch.get(position);
         holder.taskName.setText(assignedModel.getCaption());
         Glide.with(context)
                 .asBitmap()
@@ -114,7 +118,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                         Util.setCompletionHandler(new Handler(), 0, context, new Util.CompletionHandler() {
                             @Override
                             public void onCompletion(Location location, boolean canGetLatLong) {
-                                mCallback.ShareClicked(menuList.get(position), "","0","",location.getLatitude() + "," + location.getLongitude());
+                                mCallback.ShareClicked(menuListSearch.get(position), "","0","",location.getLatitude() + "," + location.getLongitude());
                             }
                         });
 
@@ -129,7 +133,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
         @Override
         public int getItemCount () {
 
-            return menuList.size();
+            return menuListSearch.size();
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -149,4 +153,18 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
         }
 
 
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        menuListSearch.clear();
+        if (charText.length() == 0) {
+            menuListSearch.addAll(menuList);
+        } else {
+            for (MenuDetailModel wp : menuList) {
+                if (wp.getCaption().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    menuListSearch.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 }

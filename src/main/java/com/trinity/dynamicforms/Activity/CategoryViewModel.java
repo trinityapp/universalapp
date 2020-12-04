@@ -15,6 +15,7 @@ import com.trinity.dynamicforms.Database.Model.SaveImageModel;
 import com.trinity.dynamicforms.Models.ErrorModel;
 import com.trinity.dynamicforms.Models.MenuModel;
 import com.trinity.dynamicforms.Models.SaveChecklistModel;
+import com.trinity.dynamicforms.Utils.Constant;
 import com.trinity.dynamicforms.Utils.SharedpreferenceUtility;
 import com.trinity.dynamicforms.Utils.Util;
 
@@ -84,7 +85,7 @@ public class CategoryViewModel {
             @Override
             public void onResponse(Call<MenuModel> call, retrofit2.Response<MenuModel> response) {
                 MenuModel mLogin = response.body();
-                SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel("menu",mLogin.getMenu());
+                SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel(Constant.Menu,mLogin.getMenu());
                 completion.menuSaved(true);
 //                loadMenuData();
             }

@@ -2085,7 +2085,7 @@ layout camera_layout
 layout caption_layout
 layout clock_layout
 layout custom_dialog
-layout custom_tab
+layout custom_lottie_tab
 layout dashboard_recycler
 layout date_layout
 layout design_bottom_navigation_item

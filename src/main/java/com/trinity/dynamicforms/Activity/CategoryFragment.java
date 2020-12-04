@@ -10,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -23,6 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.trinity.dynamicforms.Adapter.CategoryTaskRecyclerAdapter;
 import com.trinity.dynamicforms.Database.Database;
 import com.trinity.dynamicforms.Models.MenuDetailModel;
+import com.trinity.dynamicforms.Models.MenuModel;
 import com.trinity.dynamicforms.R;
 import com.trinity.dynamicforms.Utils.Constant;
 import com.trinity.dynamicforms.Utils.SharedpreferenceUtility;
@@ -31,7 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryFragment extends Fragment{
+public class CategoryFragment extends Fragment implements SearchView.OnQueryTextListener {
     Context context;
     SwipeRefreshLayout pullToRefresh;
     Handler menuHandler = new Handler();
@@ -42,6 +46,21 @@ public class CategoryFragment extends Fragment{
     String did;
     String role_id;
     String company;
+    CategoryTaskRecyclerAdapter onlycustomAdapter;
+
+    public static CategoryFragment newInstance(String baseUrl, String emp_id, String role_id, MenuModel menu) {
+        CategoryFragment f = new CategoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.Base_url, baseUrl);
+        bundle.putString(Constant.Empid, emp_id);
+        bundle.putString(Constant.RoleId, role_id);
+        bundle.putString(Constant.Did, "");
+        bundle.putSerializable(Constant.Menu, menu.getMenu());
+        f.setArguments(bundle);
+        return f;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,16 +78,19 @@ public class CategoryFragment extends Fragment{
         role_id = intent.getString(Constant.RoleId);
         company = intent.getString(Constant.Company);
         did = intent.getString(Constant.Did);
+        ArrayList<MenuDetailModel> menu = (ArrayList<MenuDetailModel>) intent.getSerializable(Constant.Menu);
+        Log.d("Menu", String.valueOf(menu.size()));
+        SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel(Constant.Menu,menu);
         viewModel = new CategoryViewModel(context, base_url, emp_id, role_id,company, db);
         SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Empid, emp_id);
         SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Did, did);
         viewModel.getCheckList();
-        viewModel.getMenuDetails(new CategoryViewModel.OnShareMenuClickedListener() {
-            @Override
-            public void menuSaved(Boolean isSuccess) {
+//        viewModel.getMenuDetails(new CategoryViewModel.OnShareMenuClickedListener() {
+//            @Override
+//            public void menuSaved(Boolean isSuccess) {
                 loadMenuData();
-            }
-        });
+//            }
+//        });
         pullToRefresh = getView().findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -78,19 +100,20 @@ public class CategoryFragment extends Fragment{
                 pullToRefresh.setRefreshing(false);
             }
         });
+
+        SearchView searchView = (SearchView) getView().findViewById(R.id.search);
+        searchView.setOnQueryTextListener(this);
     }
 
     public void refreshData(){
         Log.d("Refresh","Refresh");
-//        if(!isResumed) {
         viewModel.getCheckList();
-        viewModel.getMenuDetails(new CategoryViewModel.OnShareMenuClickedListener() {
-            @Override
-            public void menuSaved(Boolean isSuccess) {
+//        viewModel.getMenuDetails(new CategoryViewModel.OnShareMenuClickedListener() {
+//            @Override
+//            public void menuSaved(Boolean isSuccess) {
                 loadMenuData();
-            }
-        });
-//        }
+//            }
+//        });
     }
 
     @Override
@@ -106,13 +129,13 @@ public class CategoryFragment extends Fragment{
 
 
     public void loadMenuData(){
-        final List<MenuDetailModel> menu = SharedpreferenceUtility.getInstance(context).getArrayListMenuCategoryModel("menu");
+        final List<MenuDetailModel> menu = SharedpreferenceUtility.getInstance(context).getArrayListMenuCategoryModel(Constant.Menu);
         if(menu!=null) {
             RecyclerView _onlytaskrecyclerview = (RecyclerView) getView().findViewById(R.id.recyclerView);
 //            _onlytaskrecyclerview.setNestedScrollingEnabled(false);
             GridLayoutManager onlylinearLayoutManager = new GridLayoutManager(context, 1);
             _onlytaskrecyclerview.setLayoutManager(onlylinearLayoutManager);
-            CategoryTaskRecyclerAdapter onlycustomAdapter = new CategoryTaskRecyclerAdapter(context, menu, menuHandler);
+            onlycustomAdapter = new CategoryTaskRecyclerAdapter(context, menu, menuHandler);
             onlycustomAdapter.setOnShareClickedListener(new CategoryTaskRecyclerAdapter.OnShareClickedListener() {
                 @Override
                 public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String latlong) {
@@ -164,5 +187,17 @@ public class CategoryFragment extends Fragment{
                 //Write your code if there's no result
             }
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        onlycustomAdapter.filter(text);
+        return false;
     }
 }

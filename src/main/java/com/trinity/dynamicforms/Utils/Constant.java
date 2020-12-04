@@ -8,6 +8,8 @@ public class Constant {
     public static String Empid="Empid";
     public static String RoleId="RoleId";
     public static String Did = "did";
+    public static String Menu = "Menu";
+
 //    public static String FieldUser = "FieldUser";
 //    public static final String WebService_Request_Type="WebService_Request_Type";
 //    public static final int TaskList=1;

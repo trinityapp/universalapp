@@ -97,7 +97,12 @@ public class SubCategoryTaskRecyclerAdapter extends RecyclerView.Adapter<SubCate
                 Util.setCompletionHandler(new Handler(), 0, context, new Util.CompletionHandler() {
                     @Override
                     public void onCompletion(Location location, boolean canGetLatLong) {
-                        mCallback.ShareClicked(menuList.get(position), "","0","",location.getLatitude() + "," + location.getLongitude());
+                        if(location != null) {
+                            mCallback.ShareClicked(menuList.get(position), "", "0", "", location.getLatitude() + "," + location.getLongitude());
+                        } else {
+                            mCallback.ShareClicked(menuList.get(position), "", "0", "", " , ");
+
+                        }
                     }
                 });
             }

@@ -1,56 +1,84 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
-INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
-INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
-INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
-INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
-INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
-INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
 	package
 		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:3:5-39
 		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml
 		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
 		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-19:12
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:1-25:12
 		INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:4:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:5:22-76
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:6:5-75
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:6:22-72
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:7:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:8:5-80
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:8:22-77
+uses-permission#android.permission.CAMERA
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:9:5-65
+	android:name
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:9:22-62
 application
-ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:5:5-17:19
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:10:5-23:19
+	android:requestLegacyExternalStorage
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:15:9-52
 	android:supportsRtl
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:8:9-35
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:13:9-35
 	android:label
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:7:9-41
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:12:9-41
 	android:allowBackup
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:6:9-35
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:9:9-65
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:16:9-40
+	android:networkSecurityConfig
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:14:9-69
 activity#com.trinity.dynamicforms.Activity.ViewPagerForms
-ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:11:9-12:20
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:17:9-18:20
 	android:name
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:11:19-58
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:17:19-58
 activity#com.trinity.dynamicforms.Activity.SubCategoryActivity
-ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:13:9-66
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:19:9-66
 	android:name
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:13:19-63
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:19:19-63
 activity#com.trinity.dynamicforms.DetailsActivity.URLActivity
-ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:14:9-64
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:20:9-64
 	android:name
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:14:19-62
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:20:19-62
 activity#com.trinity.dynamicforms.DetailsActivity.ImageActivity
-ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:15:9-66
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:21:9-66
 	android:name
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:15:19-64
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:21:19-64
 activity#com.trinity.dynamicforms.DetailsActivity.VideoLandscapeActivity
-ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:16:9-75
+ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:22:9-75
 	android:name
-		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:16:19-73
+		ADDED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml:22:19-73
 uses-sdk
 INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Volumes/TOSHIBA EXT/TrinityBitbucket/SalesForceReplica/DynamicForms/src/main/AndroidManifest.xml

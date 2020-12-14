@@ -12,7 +12,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.trinity.dynamicforms.Activity.CategoryFragment;
+import com.trinity.dynamicforms.Activity.CategoryViewModel;
 import com.trinity.dynamicforms.Activity.ViewPagerForms;
+import com.trinity.dynamicforms.Database.Database;
 import com.trinity.dynamicforms.Models.MenuDetailModel;
 import com.trinity.dynamicforms.Models.MenuModel;
 import com.trinity.dynamicforms.Utils.Constant;
@@ -25,8 +27,9 @@ public class DynamicFormHelper {
     String emp_id;
     String role_id;
     String did;
+    String company;
 
-    public DynamicFormHelper(Context context, MenuModel menu, int container, String base_url, String emp_id, String role_id, String did) {
+    public DynamicFormHelper(Context context, MenuModel menu, int container, String base_url, String emp_id, String role_id, String did, String company) {
         this.context = context;
         this.menu = menu;
         this.container = container;
@@ -34,21 +37,33 @@ public class DynamicFormHelper {
         this.emp_id = emp_id;
         this.role_id = role_id;
         this.did = did;
+        this.company = company;
     }
 
 
     public void setFrameLayoutContainer(){
-        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id, menu);
+        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did, menu );
         FragmentManager fragmentManager =((AppCompatActivity) context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
-
         fragmentTransaction.add(container, fragobj);
 
         fragmentTransaction.commit();
     }
     public Fragment getFragment(){
-        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id, menu);
+        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did, menu);
         return fragobj;
     }
+
+    public Database getDatabase(){
+        Database fragobj = Database.getDatabase(context);
+        return fragobj;
+    }
+
+    public CategoryViewModel getCategoryViewModel(){
+        CategoryViewModel fragobj = new CategoryViewModel(context, base_url, emp_id, role_id,company, getDatabase());
+        return fragobj;
+    }
+
+
 }

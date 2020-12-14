@@ -68,13 +68,13 @@ id locpic
 id match
 id not_scannable
 id prev
-id pullToRefresh
 id qrCode_Edit
 id radioGroupBarCode
 id ratingBar
 id recyclerView
 id scannable
 id scrollView
+id search
 id seekBar
 id showVedio
 id signLin
@@ -101,6 +101,7 @@ layout activity_view_pager_forms
 layout camera_layout
 layout caption_layout
 layout clock_layout
+layout custom_lottie_tab
 layout custom_tab
 layout dashboard_recycler
 layout date_layout

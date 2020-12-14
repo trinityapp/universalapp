@@ -36,6 +36,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryFragment extends Fragment implements SearchView.OnQueryTextListener {
+
+    public interface onResponseEventListener {
+        void onApiResponse(Boolean isSuccess);
+    }
+
     Context context;
     SwipeRefreshLayout pullToRefresh;
     Handler menuHandler = new Handler();
@@ -47,19 +52,29 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
     String role_id;
     String company;
     CategoryTaskRecyclerAdapter onlycustomAdapter;
-
-    public static CategoryFragment newInstance(String baseUrl, String emp_id, String role_id, MenuModel menu) {
+    onResponseEventListener eventListener;
+    public static CategoryFragment newInstance(String baseUrl, String emp_id, String role_id,String did, MenuModel menu) {
         CategoryFragment f = new CategoryFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constant.Base_url, baseUrl);
         bundle.putString(Constant.Empid, emp_id);
         bundle.putString(Constant.RoleId, role_id);
-        bundle.putString(Constant.Did, "");
+        bundle.putString(Constant.Did,did );
         bundle.putSerializable(Constant.Menu, menu.getMenu());
         f.setArguments(bundle);
         return f;
     }
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            eventListener = (onResponseEventListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement onSomeEventListener");
+        }
+    }
 
     @Nullable
     @Override
@@ -70,8 +85,21 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        context= getActivity();
         db = Database.getDatabase(getContext());
+
+//        pullToRefresh = getView().findViewById(R.id.pullToRefresh);
+//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                refreshData(); // your code
+//                pullToRefresh.setRefreshing(false);
+//            }
+//        });
+
+        SearchView searchView = (SearchView) getView().findViewById(R.id.search);
+        searchView.setOnQueryTextListener(this);
+
+        context= getActivity();
         Bundle intent = this.getArguments();
         base_url = intent.getString(Constant.Base_url);
         emp_id = intent.getString(Constant.Empid);
@@ -79,30 +107,23 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
         company = intent.getString(Constant.Company);
         did = intent.getString(Constant.Did);
         ArrayList<MenuDetailModel> menu = (ArrayList<MenuDetailModel>) intent.getSerializable(Constant.Menu);
-        Log.d("Menu", String.valueOf(menu.size()));
         SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel(Constant.Menu,menu);
         viewModel = new CategoryViewModel(context, base_url, emp_id, role_id,company, db);
         SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Empid, emp_id);
         SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Did, did);
         viewModel.getCheckList();
-//        viewModel.getMenuDetails(new CategoryViewModel.OnShareMenuClickedListener() {
-//            @Override
-//            public void menuSaved(Boolean isSuccess) {
-                loadMenuData();
-//            }
-//        });
-        pullToRefresh = getView().findViewById(R.id.pullToRefresh);
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-//                isResumed = false;
-                refreshData(); // your code
-                pullToRefresh.setRefreshing(false);
-            }
-        });
+        loadMenuData();
+    }
 
-        SearchView searchView = (SearchView) getView().findViewById(R.id.search);
-        searchView.setOnQueryTextListener(this);
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            // load data here
+
+        }else{
+            // fragment is no longer visible
+        }
     }
 
     public void refreshData(){
@@ -119,7 +140,6 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
     @Override
     public void onResume() {
         super.onResume();
-        tappedOnUpload();
     }
 
     public void tappedOnUpload(){
@@ -138,15 +158,17 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
             onlycustomAdapter = new CategoryTaskRecyclerAdapter(context, menu, menuHandler);
             onlycustomAdapter.setOnShareClickedListener(new CategoryTaskRecyclerAdapter.OnShareClickedListener() {
                 @Override
-                public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String latlong) {
+                public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId, String isDataSend) {
                     if (menu.getSubCategory() != null) { //this is to check to go to subcategory or checklist
                         if(menu.getSubCategory().isEmpty()) {
                             Intent myIntent = new Intent(context, ViewPagerForms.class);
-                            myIntent.putExtra("title", menu.getCaption());
+                            myIntent.putExtra("title",menu.getCaption());
                             myIntent.putExtra("locationId", locationId);
                             myIntent.putExtra("mappingid", mappingId);
                             myIntent.putExtra("distance", distance);
-                            myIntent.putExtra("latlong", latlong);
+                            myIntent.putExtra("assignId", assignId);
+                            myIntent.putExtra("isDataSend", isDataSend);
+                            myIntent.putExtra("activityId", activityId);
                             myIntent.putExtra(Constant.SubCategoryKey, menu);
                             startActivityForResult(myIntent, 1);
                         }
@@ -163,11 +185,14 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
                         myIntent.putExtra("locationId", locationId);
                         myIntent.putExtra("mappingid", mappingId);
                         myIntent.putExtra("distance", distance);
-                        myIntent.putExtra("latlong", latlong);
+                        myIntent.putExtra("assignId", assignId);
+                        myIntent.putExtra("isDataSend", isDataSend);
+                        myIntent.putExtra("activityId", activityId);
                         myIntent.putExtra(Constant.SubCategoryKey, menu);
                         startActivityForResult(myIntent, 1);
                     }
                 }
+
             });
             _onlytaskrecyclerview.setAdapter(onlycustomAdapter);
         }
@@ -180,12 +205,67 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra("submitted");
                 if(result.equals("submitted")){
-                    refreshData();
+//                    refreshData();
+                    tappedOnUpload();
+                    eventListener.onApiResponse(true);
+
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+
+                eventListener.onApiResponse(false);
             }
+        }
+    }
+
+    public void loadOfflineMenuData(){
+        final List<MenuDetailModel> menu = SharedpreferenceUtility.getInstance(context).getArrayListMenuCategoryModel(Constant.Menu);
+        if(menu!=null) {
+            RecyclerView _onlytaskrecyclerview = (RecyclerView) getView().findViewById(R.id.recyclerView);
+//            _onlytaskrecyclerview.setNestedScrollingEnabled(false);
+            GridLayoutManager onlylinearLayoutManager = new GridLayoutManager(context, 1);
+            _onlytaskrecyclerview.setLayoutManager(onlylinearLayoutManager);
+            onlycustomAdapter = new CategoryTaskRecyclerAdapter(context, menu, menuHandler);
+            onlycustomAdapter.setOnShareClickedListener(new CategoryTaskRecyclerAdapter.OnShareClickedListener() {
+                @Override
+                public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId, String isDataSend) {
+                    if (menu.getSubCategory() != null) { //this is to check to go to subcategory or checklist
+                        if(menu.getSubCategory().isEmpty()) {
+                            Intent myIntent = new Intent(context, ViewPagerForms.class);
+                            myIntent.putExtra("title",menu.getCaption());
+                            myIntent.putExtra("locationId", locationId);
+                            myIntent.putExtra("mappingid", mappingId);
+                            myIntent.putExtra("distance", distance);
+                            myIntent.putExtra("assignId", assignId);
+                            myIntent.putExtra("isDataSend", isDataSend);
+                            myIntent.putExtra("activityId", activityId);
+                            myIntent.putExtra(Constant.SubCategoryKey, menu);
+                            startActivityForResult(myIntent, 1);
+                        }
+                        else {
+                            Intent myIntent = new Intent(context, SubCategoryActivity.class);
+                            myIntent.putExtra(Constant.SubCategoryTitle, menu.getCaption());
+                            myIntent.putExtra(Constant.SubCategoryKey, menu);
+                            startActivityForResult(myIntent, 1);
+                        }
+
+                    } else {
+                        Intent myIntent = new Intent(context, ViewPagerForms.class);
+                        myIntent.putExtra("title",menu.getCaption());
+                        myIntent.putExtra("locationId", locationId);
+                        myIntent.putExtra("mappingid", mappingId);
+                        myIntent.putExtra("distance", distance);
+                        myIntent.putExtra("assignId", assignId);
+                        myIntent.putExtra("isDataSend", isDataSend);
+                        myIntent.putExtra("activityId", activityId);
+                        myIntent.putExtra(Constant.SubCategoryKey, menu);
+                        startActivityForResult(myIntent, 1);
+                    }
+                }
+
+            });
+            _onlytaskrecyclerview.setAdapter(onlycustomAdapter);
         }
     }
 

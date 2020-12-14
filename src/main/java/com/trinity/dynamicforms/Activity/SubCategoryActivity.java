@@ -88,16 +88,17 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
     }
 
     @Override
-    public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String latlong) {
+    public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId, String isDataSend) {
         if (menu.getSubCategory() != null){
             if(menu.getSubCategory().isEmpty()){
                 Intent myIntent = new Intent(context, ViewPagerForms.class);
-                myIntent.putExtra(Constant.GroupChecklistKey, menu);
-                myIntent.putExtra("title",list.getCaption());
+                myIntent.putExtra("title",menu.getCaption());
                 myIntent.putExtra("locationId", locationId);
                 myIntent.putExtra("mappingid", mappingId);
                 myIntent.putExtra("distance", distance);
-                myIntent.putExtra("latlong", latlong);
+                myIntent.putExtra("assignId", assignId);
+                myIntent.putExtra("isDataSend", isDataSend);
+                myIntent.putExtra("activityId", activityId);
                 startActivityForResult(myIntent, 1);
             } else {
                 list = menu;
@@ -112,11 +113,13 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
         }else{
             Intent myIntent = new Intent(context, ViewPagerForms.class);
             myIntent.putExtra(Constant.GroupChecklistKey, menu);
-            myIntent.putExtra("title",list.getCaption());
+            myIntent.putExtra("title",menu.getCaption());
             myIntent.putExtra("locationId", locationId);
             myIntent.putExtra("mappingid", mappingId);
             myIntent.putExtra("distance", distance);
-            myIntent.putExtra("latlong", latlong);
+            myIntent.putExtra("assignId", assignId);
+            myIntent.putExtra("isDataSend", isDataSend);
+            myIntent.putExtra("activityId", activityId);
             startActivityForResult(myIntent, 1);
         }
     }

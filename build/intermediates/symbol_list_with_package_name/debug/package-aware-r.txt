@@ -1907,7 +1907,6 @@ id pin
 id prev
 id progress_circular
 id progress_horizontal
-id pullToRefresh
 id qrCode_Edit
 id radio
 id radioGroupBarCode
@@ -2085,6 +2084,7 @@ layout camera_layout
 layout caption_layout
 layout clock_layout
 layout custom_dialog
+layout custom_lottie_tab
 layout custom_tab
 layout dashboard_recycler
 layout date_layout

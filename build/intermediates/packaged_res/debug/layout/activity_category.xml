@@ -9,11 +9,11 @@
         android:queryHint="Search Here"
         android:iconifiedByDefault="false"
         android:layout_alignParentTop="true"/>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pullToRefresh"
-        >
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/pullToRefresh"-->
+<!--        >-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -21,5 +21,5 @@
         android:padding="15dp">
 
     </androidx.recyclerview.widget.RecyclerView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 </LinearLayout>

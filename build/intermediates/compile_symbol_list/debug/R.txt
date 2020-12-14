@@ -1906,7 +1906,6 @@ int id pin 0x0
 int id prev 0x0
 int id progress_circular 0x0
 int id progress_horizontal 0x0
-int id pullToRefresh 0x0
 int id qrCode_Edit 0x0
 int id radio 0x0
 int id radioGroupBarCode 0x0
@@ -2084,6 +2083,7 @@ int layout camera_layout 0x0
 int layout caption_layout 0x0
 int layout clock_layout 0x0
 int layout custom_dialog 0x0
+int layout custom_lottie_tab 0x0
 int layout custom_tab 0x0
 int layout dashboard_recycler 0x0
 int layout date_layout 0x0

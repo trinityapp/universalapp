@@ -16,6 +16,9 @@ public interface SaveDataDao {
         @Query("SELECT * FROM savedatamodel WHERE timestamp = :timestamp")
         List<SaveDataModel> getData(String timestamp);
 
+        @Query("SELECT * FROM savedatamodel WHERE uniqueId = :uniqueId")
+        List<SaveDataModel> getDataForUniqueId(String uniqueId);
+
         @Query("SELECT * FROM saveDataModel")
         List<SaveDataModel> getAll();
 

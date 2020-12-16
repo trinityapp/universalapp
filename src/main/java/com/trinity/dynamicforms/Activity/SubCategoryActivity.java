@@ -26,6 +26,7 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
     MenuDetailModel list;
     Handler handler;
     TextView subcategoryTitle;
+    String uniqueId = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
         Intent i = getIntent();
         list = (MenuDetailModel) i.getSerializableExtra(Constant.SubCategoryKey);
         subcategoryTitle.setText(i.getStringExtra(Constant.SubCategoryTitle));
+
         if(list == null){
             list = new MenuDetailModel();
         }
@@ -99,6 +101,7 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
                 myIntent.putExtra("assignId", assignId);
                 myIntent.putExtra("isDataSend", isDataSend);
                 myIntent.putExtra("activityId", activityId);
+                myIntent.putExtra("uniqueId", uniqueId);
                 startActivityForResult(myIntent, 1);
             } else {
                 list = menu;
@@ -120,6 +123,7 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
             myIntent.putExtra("assignId", assignId);
             myIntent.putExtra("isDataSend", isDataSend);
             myIntent.putExtra("activityId", activityId);
+            myIntent.putExtra("uniqueId", uniqueId);
             startActivityForResult(myIntent, 1);
         }
     }

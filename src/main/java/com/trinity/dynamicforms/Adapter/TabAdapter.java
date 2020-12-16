@@ -150,9 +150,10 @@ public class TabAdapter extends PagerAdapter {
     String mappingId = "0";
     String assignId = "";
     String activityId = "";
+    String uniqueId = "";
     String[] isDataSendArray;
     Database db;
-    public TabAdapter(Context context, Map<String, CheckPointsModel> list, String[] groupIDs, MenuDetailModel menuDetail, ViewPager viewPager, String locationId, String mappingId, String distance, String latlong, String assignId, String activityId, String isDataSend, boolean isNC ) {
+    public TabAdapter(Context context, Map<String, CheckPointsModel> list, String[] groupIDs, MenuDetailModel menuDetail, ViewPager viewPager, String locationId, String mappingId, String distance, String latlong, String assignId, String activityId,String uniqueId, String isDataSend, boolean isNC ) {
         this.list = list;
         this.groupIDs = groupIDs;
         this.menuDetail = menuDetail;
@@ -174,6 +175,7 @@ public class TabAdapter extends PagerAdapter {
         this.mappingId = mappingId;
         this.assignId = assignId;
         this.activityId = activityId;
+        this.uniqueId = uniqueId;
         if(isDataSend != null){
             this.isDataSendArray = isDataSend.split(":");
         }
@@ -399,6 +401,7 @@ public class TabAdapter extends PagerAdapter {
                                         saveDataModel.setMobiledatetime(Util.calculateMobileTime());
                                         saveDataModel.setAssignId(assignId);
                                         saveDataModel.setActivityId(activityId);
+                                        saveDataModel.setUniqueId(uniqueId);
                                         if (isNC) {
                                             db.saveDataDao().insertAll(saveDataModel);
                                         } else {

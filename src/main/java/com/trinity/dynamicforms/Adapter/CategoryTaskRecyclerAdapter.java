@@ -33,7 +33,7 @@ import java.util.Locale;
 
 public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTaskRecyclerAdapter.MyViewHolder> {
     public interface OnShareClickedListener {
-        public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId,String isDataSend);
+        public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId,String uniqueId, String isDataSend);
     }
     OnShareClickedListener mCallback;
     Context context;
@@ -106,7 +106,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                                 @Override
                                 public void onCompletion(boolean isWithingGeofence, String locationId, String mappingId, String distance, String lat, String longi) {
                                     if (isWithingGeofence) {
-                                        mCallback.ShareClicked(menuList.get(position), locationId, mappingId, distance, menuList.get(position).getAssignId(), menuList.get(position).getActivityId(), menuList.get(position).getIsDataSend());
+                                        mCallback.ShareClicked(menuList.get(position), locationId, mappingId, distance, menuList.get(position).getAssignId(), menuList.get(position).getActivityId(),menuList.get(position).getUniqueId(), menuList.get(position).getIsDataSend());
                                     } else {
                                         Alerts.showSimpleAlert(context, "Error!", "You are far from the required location. You need to be within the radius of " + finalGeofence);
 //                                    Toast.makeText(context, "You are far from the required location. You need to be within the radius of " + finalGeofence, Toast.LENGTH_LONG).show();
@@ -119,7 +119,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                             Util.setCompletionHandler(new Handler(), 0, context, new Util.CompletionHandler() {
                                 @Override
                                 public void onCompletion(Location location, boolean canGetLatLong) {
-                                    mCallback.ShareClicked(menuList.get(position), menuList.get(position).getLocationId(),"0","",menuList.get(position).getAssignId(), menuList.get(position).getActivityId(),menuList.get(position).getIsDataSend());
+                                    mCallback.ShareClicked(menuList.get(position), menuList.get(position).getLocationId(),"0","",menuList.get(position).getAssignId(), menuList.get(position).getActivityId(),menuList.get(position).getUniqueId(),menuList.get(position).getIsDataSend());
                                 }
                             });
 

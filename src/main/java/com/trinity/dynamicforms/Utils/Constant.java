@@ -8,6 +8,8 @@ public class Constant {
     public static String Empid="Empid";
     public static String RoleId="RoleId";
     public static String Did = "did";
+    public static String Tid = "tid";
+    public static String UniqueId = "uniqueId";
     public static String Menu = "Menu";
 
 //    public static String FieldUser = "FieldUser";

@@ -27,9 +27,10 @@ public class DynamicFormHelper {
     String emp_id;
     String role_id;
     String did;
-    String company;
+    String tid;
+    String company, uniqueId;
 
-    public DynamicFormHelper(Context context, MenuModel menu, int container, String base_url, String emp_id, String role_id, String did, String company) {
+    public DynamicFormHelper(Context context, MenuModel menu, int container, String base_url, String emp_id, String role_id, String did,String tid, String company) {
         this.context = context;
         this.menu = menu;
         this.container = container;
@@ -37,12 +38,14 @@ public class DynamicFormHelper {
         this.emp_id = emp_id;
         this.role_id = role_id;
         this.did = did;
+        this.tid = tid;
         this.company = company;
+//        this.uniqueId = uniqueId;
     }
 
 
     public void setFrameLayoutContainer(){
-        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did, menu );
+        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did, menu, tid);
         FragmentManager fragmentManager =((AppCompatActivity) context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
@@ -51,7 +54,7 @@ public class DynamicFormHelper {
         fragmentTransaction.commit();
     }
     public Fragment getFragment(){
-        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did, menu);
+        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did, menu, tid);
         return fragobj;
     }
 
@@ -61,7 +64,7 @@ public class DynamicFormHelper {
     }
 
     public CategoryViewModel getCategoryViewModel(){
-        CategoryViewModel fragobj = new CategoryViewModel(context, base_url, emp_id, role_id,company, getDatabase());
+        CategoryViewModel fragobj = new CategoryViewModel(context, base_url, emp_id, role_id,tid,company, getDatabase());
         return fragobj;
     }
 

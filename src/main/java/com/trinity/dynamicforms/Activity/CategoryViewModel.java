@@ -30,10 +30,11 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
+
 public class CategoryViewModel {
     String Base_url;
     String emp_id;
-    String role_id;
+    String role_id, tid;
     String companyName;
     Database db;
     Context context;
@@ -43,13 +44,14 @@ public class CategoryViewModel {
     public interface OnShareMenuClickedListener {
         void menuSaved(Boolean isSuccess);
     }
-    public CategoryViewModel(Context context, String base_url, String emp_id, String role_id, String company, Database db) {
+    public CategoryViewModel(Context context, String base_url, String emp_id, String role_id, String tid, String company, Database db) {
         Base_url = base_url;
         this.emp_id = emp_id;
         this.role_id = role_id;
         this.context = context;
         this.companyName = company;
         this.db = db;
+        this.tid = tid;
         Api.setHost(Base_url);
     }
 
@@ -85,7 +87,7 @@ public class CategoryViewModel {
             @Override
             public void onResponse(Call<MenuModel> call, retrofit2.Response<MenuModel> response) {
                 MenuModel mLogin = response.body();
-                SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel(Constant.Menu,mLogin.getMenu());
+                SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel(tid,mLogin.getMenu());
                 completion.menuSaved(true);
 //                loadMenuData();
             }

@@ -5,8 +5,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class SaveImageModel {
+public class SaveImageModel implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     public int uid;
@@ -21,6 +23,7 @@ public class SaveImageModel {
     String Chk_Id;
     @ColumnInfo(name = "depend_upon")
     String depend_upon;
+
 
     public String getDepend_upon() {
         return depend_upon;

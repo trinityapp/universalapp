@@ -15,6 +15,23 @@ public class ErrorModel {
     @Expose
     private String TransID;
 
+
+    @SerializedName("fileName")
+    @Expose
+    private String fileName;
+
+    @SerializedName("caption")
+    @Expose
+    private String caption;
+
+    @SerializedName("timestamp")
+    @Expose
+    private String timestamp;
+
+    @SerializedName("chk_id")
+    @Expose
+    private String chk_id;
+
     public String getTransID() {
         return TransID;
     }
@@ -37,5 +54,37 @@ public class ErrorModel {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getChk_id() {
+        return chk_id;
+    }
+
+    public void setChk_id(String chk_id) {
+        this.chk_id = chk_id;
     }
 }

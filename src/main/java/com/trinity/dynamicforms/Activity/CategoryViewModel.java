@@ -15,6 +15,7 @@ import com.trinity.dynamicforms.Database.Model.SaveImageModel;
 import com.trinity.dynamicforms.Models.ErrorModel;
 import com.trinity.dynamicforms.Models.MenuModel;
 import com.trinity.dynamicforms.Models.SaveChecklistModel;
+import com.trinity.dynamicforms.Service.ForegroundService;
 import com.trinity.dynamicforms.Utils.Constant;
 import com.trinity.dynamicforms.Utils.SharedpreferenceUtility;
 import com.trinity.dynamicforms.Utils.Util;
@@ -30,6 +31,10 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
+import static com.trinity.dynamicforms.Utils.Constant.Company;
+import static com.trinity.dynamicforms.Utils.Constant.Empid;
+import static com.trinity.dynamicforms.Utils.Constant.Mobile;
+
 
 public class CategoryViewModel {
     String Base_url;
@@ -38,6 +43,7 @@ public class CategoryViewModel {
     String companyName;
     Database db;
     Context context;
+    ForegroundService service = new ForegroundService();
     public interface OnShareClickedListener {
         void checkPointsSaved(Boolean isSuccess);
     }
@@ -103,7 +109,10 @@ public class CategoryViewModel {
             }
         });
     }
-
+    public int getCount() {
+        List<String> data = db.saveDataDao().get_timestamp();
+        return  data.size();
+    }
 
     public void SendData(){
         List<String>data=db.saveDataDao().get_timestamp();
@@ -162,7 +171,7 @@ public class CategoryViewModel {
                     saveImageModel.setChk_Id("11"); //not required
                     db.saveImageDao().insertAll(saveImageModel);
                     try{
-                        sendImage();
+                        service.startServiceNew(context, SharedpreferenceUtility.getInstance(context).getString(Company), SharedpreferenceUtility.getInstance(context).getString(Mobile));
                     }catch (Exception e){
                         Log.v("Exception",""+e);
                     }
@@ -185,77 +194,80 @@ public class CategoryViewModel {
     }
 
     public void sendImage() {
-        List<SaveImageModel>imageModels= db.saveImageDao().getAll();
-        for(int i=0;i<imageModels.size();i++){
-            String tempDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                    + "/" +companyName + "/" + emp_id+"/"+ imageModels.get(i).getCaption() +"/"+imageModels.get(i).getTimeStamp();
-            Log.d("Files", "Path: " + tempDir);
-            File directory = new File(tempDir);
-            if(directory.exists()){
-                final File[] files = directory.listFiles();
-                Log.d("Files", "Size: "+ files.length);
-
-
-                for (int j = 0; j < files.length; j++) {
-                    uploadData(tempDir + "/" + files[j].getName(),imageModels.get(i));
-                }
-            }
-            else {
-                //surveyDb.deleteImage(imageModels.get(i).getTaskId(),imageModels.get(i).getSubTaskId());
-            }
-        }
+        service.startServiceNew(context,SharedpreferenceUtility.getInstance(context).getString(Company), SharedpreferenceUtility.getInstance(context).getString(Mobile));
     }
+//    public void sendImage() {
+//        List<SaveImageModel>imageModels= db.saveImageDao().getAll();
+//        for(int i=0;i<imageModels.size();i++){
+//            String tempDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+//                    + "/" +companyName + "/" + emp_id+"/"+ imageModels.get(i).getCaption() +"/"+imageModels.get(i).getTimeStamp();
+//            Log.d("Files", "Path: " + tempDir);
+//            File directory = new File(tempDir);
+//            if(directory.exists()){
+//                final File[] files = directory.listFiles();
+//                Log.d("Files", "Size: "+ files.length);
+//
+//
+//                for (int j = 0; j < files.length; j++) {
+//                    uploadData(tempDir + "/" + files[j].getName(),imageModels.get(i));
+//                }
+//            }
+//            else {
+//                //surveyDb.deleteImage(imageModels.get(i).getTaskId(),imageModels.get(i).getSubTaskId());
+//            }
+//        }
+//    }
 
-    private void uploadData(String file, final SaveImageModel data) {
-        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        // MultipartBody.Part is used to send also the actual file name
-        String fileUrl=file.substring(file.lastIndexOf("/")+1);
-        if (fileUrl.indexOf(".") > 0)
-            fileUrl = fileUrl.substring(0, fileUrl.lastIndexOf("."));
-        Log.d("trans_id",data.getTrans_id());
-        Log.d("chk_id",fileUrl);
-        String[] fileName = fileUrl.split("-");
-        RequestBody trans_id =
-                RequestBody.create(
-                        MediaType.parse("multipart/form-data"),  data.getTrans_id());
-        RequestBody chk_id =
-                RequestBody.create(
-                        MediaType.parse("multipart/form-data"),  fileName[0]);
-        RequestBody dependent =
-                RequestBody.create(
-                        MediaType.parse("multipart/form-data"),  fileName[1]);
-        RequestBody company =
-                RequestBody.create(
-                        MediaType.parse("multipart/form-data"), companyName);
-
-        MultipartBody.Part body=null;
-        if(!file.equals("")) {
-            File fileSend=new File(file);
-            RequestBody requestFile =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), fileSend);
-            body =MultipartBody.Part.createFormData("attachment", fileSend.getName(), requestFile);
-        }
-
-        Call<ArrayList<ErrorModel>> call = apiInterface.saveImg(body,trans_id,company,chk_id, dependent);
-
-        call.enqueue(new Callback<ArrayList<ErrorModel>>() {
-            @Override
-            public void onResponse(Call<ArrayList<ErrorModel>> call, retrofit2.Response<ArrayList<ErrorModel>> response) {
-                try {
-                    ArrayList<ErrorModel> errorModels = (ArrayList<ErrorModel>) response.body();
-                    if (errorModels.get(0).getError().equals("200")) {
-                        db.saveImageDao().delete(data);
-                    }
-                }catch (Exception e){}
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<ErrorModel>> call, Throwable t) {
-                Log.d("Falire", "onFailure: "+t.getLocalizedMessage());
-            }
-        });
-
-    }
+//    private void uploadData(String file, final SaveImageModel data) {
+//        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+//        // MultipartBody.Part is used to send also the actual file name
+//        String fileUrl=file.substring(file.lastIndexOf("/")+1);
+//        if (fileUrl.indexOf(".") > 0)
+//            fileUrl = fileUrl.substring(0, fileUrl.lastIndexOf("."));
+//        Log.d("trans_id",data.getTrans_id());
+//        Log.d("chk_id",fileUrl);
+//        String[] fileName = fileUrl.split("-");
+//        RequestBody trans_id =
+//                RequestBody.create(
+//                        MediaType.parse("multipart/form-data"),  data.getTrans_id());
+//        RequestBody chk_id =
+//                RequestBody.create(
+//                        MediaType.parse("multipart/form-data"),  fileName[0]);
+//        RequestBody dependent =
+//                RequestBody.create(
+//                        MediaType.parse("multipart/form-data"),  fileName[1]);
+//        RequestBody company =
+//                RequestBody.create(
+//                        MediaType.parse("multipart/form-data"), companyName);
+//
+//        MultipartBody.Part body=null;
+//        if(!file.equals("")) {
+//            File fileSend=new File(file);
+//            RequestBody requestFile =
+//                    RequestBody.create(MediaType.parse("multipart/form-data"), fileSend);
+//            body =MultipartBody.Part.createFormData("attachment", fileSend.getName(), requestFile);
+//        }
+//
+//        Call<ArrayList<ErrorModel>> call = apiInterface.saveImg(body,trans_id,company,chk_id, dependent);
+//
+//        call.enqueue(new Callback<ArrayList<ErrorModel>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<ErrorModel>> call, retrofit2.Response<ArrayList<ErrorModel>> response) {
+//                try {
+//                    ArrayList<ErrorModel> errorModels = (ArrayList<ErrorModel>) response.body();
+//                    if (errorModels.get(0).getError().equals("200")) {
+//                        db.saveImageDao().delete(data);
+//                    }
+//                }catch (Exception e){}
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<ErrorModel>> call, Throwable t) {
+//                Log.d("Falire", "onFailure: "+t.getLocalizedMessage());
+//            }
+//        });
+//
+//    }
 
 
 }

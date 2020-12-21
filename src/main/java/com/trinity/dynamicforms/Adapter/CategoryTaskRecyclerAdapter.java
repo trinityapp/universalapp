@@ -89,7 +89,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                 @Override
                 public void onClick(View view) {
 //            Log.d("assignedModel",assignedModel.getGeoFence());
-                    if (!assignedModel.getChpId().isEmpty()) {
+//                    if (!assignedModel.getChpId().isEmpty()) {
                         long now = System.currentTimeMillis();
                         if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
                             return;
@@ -126,7 +126,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                         }
 
                     }
-                }
+//                }
 
             });
 

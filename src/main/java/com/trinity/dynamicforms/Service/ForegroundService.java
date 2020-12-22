@@ -184,8 +184,8 @@ public class ForegroundService extends Service implements ProgressRequestBody.Up
                 }
             } else {
                 hasSentData = true;
-                stopService(getApplicationContext());
                 db.saveImageDao().delete(imageModels.get(i));
+                stopService(getApplicationContext());
                 break;
             }
         }

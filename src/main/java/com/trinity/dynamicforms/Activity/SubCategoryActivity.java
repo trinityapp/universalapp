@@ -77,10 +77,10 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra("submitted");
                 if(result.equals("submitted")){
-                    finish();
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("submitted", "submitted");
                     setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -102,6 +102,7 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
                 myIntent.putExtra("isDataSend", isDataSend);
                 myIntent.putExtra("activityId", activityId);
                 myIntent.putExtra("uniqueId", uniqueId);
+                myIntent.putExtra(Constant.SubCategoryKey, menu);
                 startActivityForResult(myIntent, 1);
             } else {
                 list = menu;
@@ -124,6 +125,7 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
             myIntent.putExtra("isDataSend", isDataSend);
             myIntent.putExtra("activityId", activityId);
             myIntent.putExtra("uniqueId", uniqueId);
+            myIntent.putExtra(Constant.SubCategoryKey, menu);
             startActivityForResult(myIntent, 1);
         }
     }

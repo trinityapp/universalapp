@@ -40,7 +40,7 @@ import java.util.List;
 public class CategoryFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     public interface onResponseEventListener {
-        void onApiResponse(Boolean isSuccess);
+        void onApiResponse(Boolean isSuccess, String tid);
     }
 
     Context context;
@@ -217,7 +217,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
 //                    refreshData();
                     if(Util.isConnected(context)) {
                         tappedOnUpload();
-                        eventListener.onApiResponse(true);
+                        eventListener.onApiResponse(true, tid);
                     } else {
                         loadOfflineMenuData();
                     }
@@ -226,7 +226,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
-                eventListener.onApiResponse(false);
+                eventListener.onApiResponse(false, tid);
             }
         }
     }

@@ -26,6 +26,7 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
     MenuDetailModel list;
     Handler handler;
     TextView subcategoryTitle;
+    String uniqueId = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
         Intent i = getIntent();
         list = (MenuDetailModel) i.getSerializableExtra(Constant.SubCategoryKey);
         subcategoryTitle.setText(i.getStringExtra(Constant.SubCategoryTitle));
+
         if(list == null){
             list = new MenuDetailModel();
         }
@@ -75,10 +77,10 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra("submitted");
                 if(result.equals("submitted")){
-                    finish();
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("submitted", "submitted");
                     setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -88,16 +90,19 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
     }
 
     @Override
-    public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String latlong) {
+    public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId, String isDataSend) {
         if (menu.getSubCategory() != null){
             if(menu.getSubCategory().isEmpty()){
                 Intent myIntent = new Intent(context, ViewPagerForms.class);
-                myIntent.putExtra(Constant.GroupChecklistKey, menu);
-                myIntent.putExtra("title",list.getCaption());
+                myIntent.putExtra("title",menu.getCaption());
                 myIntent.putExtra("locationId", locationId);
                 myIntent.putExtra("mappingid", mappingId);
                 myIntent.putExtra("distance", distance);
-                myIntent.putExtra("latlong", latlong);
+                myIntent.putExtra("assignId", assignId);
+                myIntent.putExtra("isDataSend", isDataSend);
+                myIntent.putExtra("activityId", activityId);
+                myIntent.putExtra("uniqueId", uniqueId);
+                myIntent.putExtra(Constant.SubCategoryKey, menu);
                 startActivityForResult(myIntent, 1);
             } else {
                 list = menu;
@@ -112,11 +117,15 @@ public class SubCategoryActivity extends AppCompatActivity implements SubCategor
         }else{
             Intent myIntent = new Intent(context, ViewPagerForms.class);
             myIntent.putExtra(Constant.GroupChecklistKey, menu);
-            myIntent.putExtra("title",list.getCaption());
+            myIntent.putExtra("title",menu.getCaption());
             myIntent.putExtra("locationId", locationId);
             myIntent.putExtra("mappingid", mappingId);
             myIntent.putExtra("distance", distance);
-            myIntent.putExtra("latlong", latlong);
+            myIntent.putExtra("assignId", assignId);
+            myIntent.putExtra("isDataSend", isDataSend);
+            myIntent.putExtra("activityId", activityId);
+            myIntent.putExtra("uniqueId", uniqueId);
+            myIntent.putExtra(Constant.SubCategoryKey, menu);
             startActivityForResult(myIntent, 1);
         }
     }

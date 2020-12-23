@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class SubCategoryTaskRecyclerAdapter extends RecyclerView.Adapter<SubCategoryTaskRecyclerAdapter.MyViewHolder> {
     public interface OnShareClickedListener {
-        public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String latong);
+        public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId,String isDataSend);
     }
     OnShareClickedListener mCallback;
     Context context;
@@ -85,7 +85,7 @@ public class SubCategoryTaskRecyclerAdapter extends RecyclerView.Adapter<SubCate
                     @Override
                     public void onCompletion(boolean isWithingGeofence, String locationId, String mappingId, String distance, String lat, String longi) {
                         if (isWithingGeofence) {
-                            mCallback.ShareClicked(menuList.get(position), locationId, mappingId, distance, lat+","+longi);
+                            mCallback.ShareClicked(menuList.get(position), locationId, mappingId, distance, menuList.get(position).getAssignId(), menuList.get(position).getActivityId(), menuList.get(position).getIsDataSend());
                         } else {
                             Alerts.showSimpleAlert(context, "Error!","You are far from the required location. You need to be within the radius of " + finalGeofence);
 //                            Toast.makeText(context, "You are far from the required location. You need to be within the radius of " + finalGeofence, Toast.LENGTH_LONG).show();
@@ -97,12 +97,7 @@ public class SubCategoryTaskRecyclerAdapter extends RecyclerView.Adapter<SubCate
                 Util.setCompletionHandler(new Handler(), 0, context, new Util.CompletionHandler() {
                     @Override
                     public void onCompletion(Location location, boolean canGetLatLong) {
-                        if(location != null) {
-                            mCallback.ShareClicked(menuList.get(position), "", "0", "", location.getLatitude() + "," + location.getLongitude());
-                        } else {
-                            mCallback.ShareClicked(menuList.get(position), "", "0", "", " , ");
-
-                        }
+                        mCallback.ShareClicked(menuList.get(position), menuList.get(position).getLocationId(),"0","",menuList.get(position).getAssignId(), menuList.get(position).getActivityId(),menuList.get(position).getIsDataSend());
                     }
                 });
             }

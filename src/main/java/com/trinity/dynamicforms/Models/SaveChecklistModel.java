@@ -7,19 +7,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SaveChecklistModel implements Serializable {
-//    @SerializedName("Chkp_Id")
-//    @Expose
+    @SerializedName("Chkp_Id")
+    @Expose
     private String chkpId;
-//    @SerializedName("value")
-//    @Expose
+    @SerializedName("value")
+    @Expose
     private String value;
 
-//    @SerializedName("Dependent")
-//    @Expose
+    @SerializedName("Dependent")
+    @Expose
     private String Dependent;
 
-//    @SerializedName("editable")
-//    @Expose
+    @SerializedName("editable")
+    @Expose
     private String editable;
 
     public String getEditable() {
@@ -30,8 +30,8 @@ public class SaveChecklistModel implements Serializable {
         this.editable = editable;
     }
 
-//    @SerializedName("Dependents")
-//    @Expose
+    @SerializedName("Dependents")
+    @Expose
     private ArrayList<SaveChecklistModel> Dependents;
 
     public String getDependent() {

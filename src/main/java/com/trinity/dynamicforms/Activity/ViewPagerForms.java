@@ -64,6 +64,7 @@ public class ViewPagerForms extends AppCompatActivity {
         String latlong = intent.getStringExtra("latlong");
         String assignId = intent.getStringExtra("assignId");
         String activityId = intent.getStringExtra("activityId");
+        String uniqueId = intent.getStringExtra("uniqueId");
         String isDataSend = intent.getStringExtra("isDataSend");
         if(menuDetail.getValue() != null){
             checkListModels = setupCheckpoints(menuDetail.getValue());
@@ -78,9 +79,9 @@ public class ViewPagerForms extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         if(titleString.equals("NC")) {
-            adapter = new TabAdapter(ViewPagerForms.this, checkListModels, groupChecklistId, menuDetail, viewPager, locationId, mappingid,distance, latlong,assignId, activityId,isDataSend,true);
+            adapter = new TabAdapter(ViewPagerForms.this, checkListModels, groupChecklistId, menuDetail, viewPager, locationId, mappingid,distance, latlong,assignId, activityId,uniqueId,isDataSend,true);
         } else {
-            adapter = new TabAdapter(ViewPagerForms.this, checkListModels, groupChecklistId, menuDetail, viewPager,locationId, mappingid,distance, latlong,assignId, activityId,isDataSend,false);
+            adapter = new TabAdapter(ViewPagerForms.this, checkListModels, groupChecklistId, menuDetail, viewPager,locationId, mappingid,distance, latlong,assignId, activityId,uniqueId,isDataSend,false);
         }
 
         viewPager.setAdapter(adapter);

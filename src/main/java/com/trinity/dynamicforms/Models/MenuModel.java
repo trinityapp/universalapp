@@ -4,9 +4,10 @@ package com.trinity.dynamicforms.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MenuModel {
+public class MenuModel implements Serializable {
 
     public ArrayList<MenuDetailModel> getMenu() {
         return menu;

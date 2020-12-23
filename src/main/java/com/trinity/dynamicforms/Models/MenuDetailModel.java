@@ -96,6 +96,18 @@ public class MenuDetailModel implements Serializable {
     @Expose
     private String activityId;
 
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
+    @SerializedName("uniqueId")
+    @Expose
+    private String uniqueId;
+
     @SerializedName("isDataSend")
     @Expose
     private String isDataSend;

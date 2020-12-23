@@ -32,11 +32,15 @@ public interface ApiInterface {
 
     @Multipart
     @POST("save_img.php")
-    Call<ArrayList<ErrorModel>> saveImg(@Part MultipartBody.Part image,
+    Call<ErrorModel> saveImg(@Part MultipartBody.Part image,
                                         @Part("trans_id") RequestBody trans_id,
                                         @Part("company") RequestBody company,
                                         @Part("chk_id") RequestBody chk_id,
-                                        @Part("depend_upon") RequestBody depend_upon);
+                                        @Part("depend_upon") RequestBody depend_upon,
+                                        @Part("timestamp") RequestBody timestamp,
+                                        @Part("caption") RequestBody caption
+
+    );
 
     @Headers({"Accept: application/json"})
     @POST("saveCheckpoint.php")     // API's endpoints

@@ -24,6 +24,7 @@ import com.trinity.dynamicforms.Utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -32,11 +33,12 @@ import java.util.List;
 
 public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTaskRecyclerAdapter.MyViewHolder> {
     public interface OnShareClickedListener {
-        public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String latlong);
+        public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId,String uniqueId, String isDataSend);
     }
     OnShareClickedListener mCallback;
     Context context;
     List<MenuDetailModel> menuList;
+    List<MenuDetailModel> menuListSearch;
     ArrayList<String> urls = new ArrayList<String>();
     private static final long CLICK_TIME_INTERVAL = 300;
     Handler handler;
@@ -47,6 +49,8 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
     public CategoryTaskRecyclerAdapter(Context context, List<MenuDetailModel> menuList, Handler handler ) {
         this.context = context;
         this.menuList=menuList;
+        this.menuListSearch = new ArrayList<MenuDetailModel>();
+        this.menuListSearch.addAll(menuList);
         this.handler = handler;
     }
 
@@ -63,7 +67,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
 
     @Override
     public void onBindViewHolder(final CategoryTaskRecyclerAdapter.MyViewHolder holder, final int position) {
-        final MenuDetailModel assignedModel = menuList.get(position);
+        final MenuDetailModel assignedModel = menuListSearch.get(position);
         holder.taskName.setText(assignedModel.getCaption());
         Glide.with(context)
                 .asBitmap()
@@ -85,46 +89,44 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                 @Override
                 public void onClick(View view) {
 //            Log.d("assignedModel",assignedModel.getGeoFence());
-                    long now = System.currentTimeMillis();
-                    if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
-                        return;
-                    }
-                    mLastClickTime = now;
-                    if (assignedModel.getGeoFence() != null) {
-                        String locationIds[] = assignedModel.getGeoCoordinate().split(",");
-                        Double geofence = 0.0;
-                        if(!assignedModel.getGeoFence().equals("") || !assignedModel.getGeoFence().equals("0")) {
-                            geofence = Double.parseDouble(assignedModel.getGeoFence());
+//                    if (!assignedModel.getChpId().isEmpty()) {
+                        long now = System.currentTimeMillis();
+                        if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
+                            return;
                         }
-                        final Double finalGeofence = geofence;
-                        Util.getDistance(locationIds, handler, context, geofence, true, new Util.DistanceHandler() {
-                            @Override
-                            public void onCompletion(boolean isWithingGeofence, String locationId, String mappingId, String distance, String lat, String longi) {
-                                if (isWithingGeofence) {
-                                    mCallback.ShareClicked(menuList.get(position), locationId, mappingId, distance, lat+","+longi);
-                                } else {
-                                    Alerts.showSimpleAlert(context, "Error!","You are far from the required location. You need to be within the radius of " + finalGeofence);
+                        mLastClickTime = now;
+                        if (assignedModel.getGeoFence() != null) {
+                            String locationIds[] = assignedModel.getGeoCoordinate().split(",");
+                            Double geofence = 0.0;
+                            if (!assignedModel.getGeoFence().equals("") || !assignedModel.getGeoFence().equals("0")) {
+                                geofence = Double.parseDouble(assignedModel.getGeoFence());
+                            }
+                            final Double finalGeofence = geofence;
+                            Util.getDistance(locationIds, handler, context, geofence, true, new Util.DistanceHandler() {
+                                @Override
+                                public void onCompletion(boolean isWithingGeofence, String locationId, String mappingId, String distance, String lat, String longi) {
+                                    if (isWithingGeofence) {
+                                        mCallback.ShareClicked(menuList.get(position), locationId, mappingId, distance, menuList.get(position).getAssignId(), menuList.get(position).getActivityId(),menuList.get(position).getUniqueId(), menuList.get(position).getIsDataSend());
+                                    } else {
+                                        Alerts.showSimpleAlert(context, "Error!", "You are far from the required location. You need to be within the radius of " + finalGeofence);
 //                                    Toast.makeText(context, "You are far from the required location. You need to be within the radius of " + finalGeofence, Toast.LENGTH_LONG).show();
 //                                            Util.activityCall("start", context, menuList.get(position).getMId(), locationId,mappingId,distance);
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                    } else {
-                        Util.setCompletionHandler(new Handler(), 0, context, new Util.CompletionHandler() {
-                            @Override
-                            public void onCompletion(Location location, boolean canGetLatLong) {
-                                if(location != null) {
-                                    mCallback.ShareClicked(menuList.get(position), "", "0", "", location.getLatitude() + "," + location.getLongitude());
-                                } else {
-                                    mCallback.ShareClicked(menuList.get(position), "", "0", "",  " , " );
+                        } else {
+                            Util.setCompletionHandler(new Handler(), 0, context, new Util.CompletionHandler() {
+                                @Override
+                                public void onCompletion(Location location, boolean canGetLatLong) {
+                                    mCallback.ShareClicked(menuList.get(position), menuList.get(position).getLocationId(),"0","",menuList.get(position).getAssignId(), menuList.get(position).getActivityId(),menuList.get(position).getUniqueId(),menuList.get(position).getIsDataSend());
                                 }
-                            }
-                        });
+                            });
+
+                        }
 
                     }
-
-                    }
+//                }
 
             });
 
@@ -133,7 +135,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
         @Override
         public int getItemCount () {
 
-            return menuList.size();
+            return menuListSearch.size();
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -153,4 +155,18 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
         }
 
 
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        menuListSearch.clear();
+        if (charText.length() == 0) {
+            menuListSearch.addAll(menuList);
+        } else {
+            for (MenuDetailModel wp : menuList) {
+                if (wp.getCaption().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    menuListSearch.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 }

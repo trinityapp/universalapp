@@ -6,59 +6,73 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="16"
-8-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml
+8-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml
 9        android:targetSdkVersion="29" />
-9-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml
+9-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:4:5-67
-11-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:4:22-64
+11-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:4:5-67
+11-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:4:22-64
 12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-12-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:5:5-79
-12-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:5:22-76
+12-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:5:5-79
+12-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:5:22-76
 13    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-13-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:6:5-75
-13-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:6:22-72
+13-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:6:5-75
+13-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:6:22-72
 14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-14-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:7:5-81
-14-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:7:22-78
+14-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:7:5-81
+14-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:7:22-78
 15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-15-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:8:5-80
-15-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:8:22-77
+15-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:8:5-80
+15-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:8:22-77
 16    <uses-permission android:name="android.permission.CAMERA" />
-16-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:9:5-65
-16-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:9:22-62
-17
-18    <application
-18-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:10:5-23:19
-19        android:allowBackup="true"
-19-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:11:9-35
-20        android:label="@string/app_name"
-20-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:12:9-41
-21        android:networkSecurityConfig="@xml/network_security_config"
-21-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:14:9-69
-22        android:requestLegacyExternalStorage="true"
-22-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:15:9-52
-23        android:supportsRtl="true"
-23-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:13:9-35
-24        android:theme="@style/AppTheme" >
-24-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:16:9-40
-25        <activity android:name="com.trinity.dynamicforms.Activity.ViewPagerForms" >
-25-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:17:9-18:20
-25-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:17:19-58
-26        </activity>
-27        <activity android:name="com.trinity.dynamicforms.Activity.SubCategoryActivity" />
-27-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:19:9-66
-27-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:19:19-63
-28        <activity android:name="com.trinity.dynamicforms.DetailsActivity.URLActivity" />
-28-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:20:9-64
-28-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:20:19-62
-29        <activity android:name="com.trinity.dynamicforms.DetailsActivity.ImageActivity" />
-29-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:21:9-66
-29-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:21:19-64
-30        <activity android:name="com.trinity.dynamicforms.DetailsActivity.VideoLandscapeActivity" />
-30-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:22:9-75
-30-->/Volumes/TOSHIBA EXT/TrinityBitbucket/LibraryTestingApplication/DynamicForms/src/main/AndroidManifest.xml:22:19-73
-31    </application>
+16-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:9:5-65
+16-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:9:22-62
+17    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+17-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:10:5-77
+17-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:10:22-74
+18
+19    <application
+19-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:11:5-30:19
+20        android:allowBackup="true"
+20-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:12:9-35
+21        android:label="@string/app_name"
+21-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:13:9-41
+22        android:networkSecurityConfig="@xml/network_security_config"
+22-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:15:9-69
+23        android:requestLegacyExternalStorage="true"
+23-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:16:9-52
+24        android:supportsRtl="true"
+24-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:14:9-35
+25        android:theme="@style/AppTheme" >
+25-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:17:9-40
+26        <activity android:name="com.trinity.dynamicforms.Activity.ViewPagerForms" >
+26-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:18:9-19:20
+26-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:18:19-58
+27        </activity>
+28        <activity android:name="com.trinity.dynamicforms.Activity.SubCategoryActivity" />
+28-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:20:9-66
+28-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:20:19-63
+29        <activity android:name="com.trinity.dynamicforms.DetailsActivity.URLActivity" />
+29-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:21:9-64
+29-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:21:19-62
+30        <activity android:name="com.trinity.dynamicforms.DetailsActivity.ImageActivity" />
+30-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:22:9-66
+30-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:22:19-64
+31        <activity android:name="com.trinity.dynamicforms.DetailsActivity.VideoLandscapeActivity" />
+31-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:23:9-75
+31-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:23:19-73
 32
-33</manifest>
+33        <service
+33-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:25:9-29:56
+34            android:name="com.trinity.dynamicforms.Service.ForegroundService"
+34-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:26:13-54
+35            android:enabled="true"
+35-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:27:13-35
+36            android:exported="true"
+36-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:28:13-36
+37            android:foregroundServiceType="location" />
+37-->/Volumes/TOSHIBA EXT/TrinityBitbucket/UniversalApp/DynamicForms/src/main/AndroidManifest.xml:29:13-53
+38    </application>
+39
+40</manifest>

@@ -41,21 +41,23 @@ public class CategoryViewModel {
     String emp_id;
     String role_id, tid;
     String companyName;
+    String phonenumber;
     Database db;
     Context context;
-    ForegroundService service = new ForegroundService();
+//    ForegroundService service = new ForegroundService();
     public interface OnShareClickedListener {
         void checkPointsSaved(Boolean isSuccess);
     }
     public interface OnShareMenuClickedListener {
         void menuSaved(Boolean isSuccess);
     }
-    public CategoryViewModel(Context context, String base_url, String emp_id, String role_id, String tid, String company, Database db) {
+    public CategoryViewModel(Context context, String base_url, String emp_id, String role_id, String tid, String company, String phonenumber, Database db) {
         Base_url = base_url;
         this.emp_id = emp_id;
         this.role_id = role_id;
         this.context = context;
         this.companyName = company;
+        this.phonenumber = phonenumber;
         this.db = db;
         this.tid = tid;
         Api.setHost(Base_url);
@@ -170,11 +172,12 @@ public class CategoryViewModel {
                     saveImageModel.setTrans_id(errorModels.getTransID());
                     saveImageModel.setChk_Id("11"); //not required
                     db.saveImageDao().insertAll(saveImageModel);
-                    try{
-                        service.startServiceNew(context, SharedpreferenceUtility.getInstance(context).getString(Company), SharedpreferenceUtility.getInstance(context).getString(Mobile));
-                    }catch (Exception e){
-                        Log.v("Exception",""+e);
-                    }
+//                    try{
+//                        service.startServiceNew(context, SharedpreferenceUtility.getInstance(context).getString(Company), SharedpreferenceUtility.getInstance(context).getString(Mobile));
+//                    }catch (Exception e){
+//                        Log.v("Exception",""+e);
+//                    }
+                    sendImage();
                     db.saveDataDao().deleteAll();
 //                    Bundle bundle = new Bundle();
 //                    bundle.putString("activity", thisactivity);
@@ -193,81 +196,101 @@ public class CategoryViewModel {
         });
     }
 
-    public void sendImage() {
-        service.startServiceNew(context,SharedpreferenceUtility.getInstance(context).getString(Company), SharedpreferenceUtility.getInstance(context).getString(Mobile));
-    }
 //    public void sendImage() {
-//        List<SaveImageModel>imageModels= db.saveImageDao().getAll();
-//        for(int i=0;i<imageModels.size();i++){
-//            String tempDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-//                    + "/" +companyName + "/" + emp_id+"/"+ imageModels.get(i).getCaption() +"/"+imageModels.get(i).getTimeStamp();
-//            Log.d("Files", "Path: " + tempDir);
-//            File directory = new File(tempDir);
-//            if(directory.exists()){
-//                final File[] files = directory.listFiles();
-//                Log.d("Files", "Size: "+ files.length);
-//
-//
-//                for (int j = 0; j < files.length; j++) {
-//                    uploadData(tempDir + "/" + files[j].getName(),imageModels.get(i));
-//                }
-//            }
-//            else {
-//                //surveyDb.deleteImage(imageModels.get(i).getTaskId(),imageModels.get(i).getSubTaskId());
-//            }
-//        }
+//        service.startServiceNew(context,SharedpreferenceUtility.getInstance(context).getString(Company), SharedpreferenceUtility.getInstance(context).getString(Mobile));
 //    }
+    public void sendImage() {
+        List<SaveImageModel>imageModels= db.saveImageDao().getAll();
+        for(int i=0;i<imageModels.size();i++){
+            String tempDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    + "/" + companyName + "/" + phonenumber + "/" + imageModels.get(i).getCaption() + "/" + imageModels.get(i).getTimeStamp();
+            Log.d("Files", "Path: " + tempDir);
+            File directory = new File(tempDir);
+            if(directory.exists()){
+                final File[] files = directory.listFiles();
+                Log.d("Files", "Size: "+ files.length);
 
-//    private void uploadData(String file, final SaveImageModel data) {
-//        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-//        // MultipartBody.Part is used to send also the actual file name
-//        String fileUrl=file.substring(file.lastIndexOf("/")+1);
-//        if (fileUrl.indexOf(".") > 0)
-//            fileUrl = fileUrl.substring(0, fileUrl.lastIndexOf("."));
-//        Log.d("trans_id",data.getTrans_id());
-//        Log.d("chk_id",fileUrl);
-//        String[] fileName = fileUrl.split("-");
-//        RequestBody trans_id =
-//                RequestBody.create(
-//                        MediaType.parse("multipart/form-data"),  data.getTrans_id());
-//        RequestBody chk_id =
-//                RequestBody.create(
-//                        MediaType.parse("multipart/form-data"),  fileName[0]);
-//        RequestBody dependent =
-//                RequestBody.create(
-//                        MediaType.parse("multipart/form-data"),  fileName[1]);
-//        RequestBody company =
-//                RequestBody.create(
-//                        MediaType.parse("multipart/form-data"), companyName);
-//
-//        MultipartBody.Part body=null;
-//        if(!file.equals("")) {
-//            File fileSend=new File(file);
-//            RequestBody requestFile =
-//                    RequestBody.create(MediaType.parse("multipart/form-data"), fileSend);
-//            body =MultipartBody.Part.createFormData("attachment", fileSend.getName(), requestFile);
-//        }
-//
-//        Call<ArrayList<ErrorModel>> call = apiInterface.saveImg(body,trans_id,company,chk_id, dependent);
-//
-//        call.enqueue(new Callback<ArrayList<ErrorModel>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<ErrorModel>> call, retrofit2.Response<ArrayList<ErrorModel>> response) {
-//                try {
-//                    ArrayList<ErrorModel> errorModels = (ArrayList<ErrorModel>) response.body();
-//                    if (errorModels.get(0).getError().equals("200")) {
-//                        db.saveImageDao().delete(data);
-//                    }
-//                }catch (Exception e){}
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<ErrorModel>> call, Throwable t) {
-//                Log.d("Falire", "onFailure: "+t.getLocalizedMessage());
-//            }
-//        });
-//
-//    }
+
+                for (int j = 0; j < files.length; j++) {
+                    uploadData(tempDir + "/" + files[j].getName(),imageModels.get(i));
+                }
+            }
+            else {
+                db.saveImageDao().delete(imageModels.get(i));
+                //surveyDb.deleteImage(imageModels.get(i).getTaskId(),imageModels.get(i).getSubTaskId());
+            }
+        }
+    }
+
+    private void uploadData(String file, final SaveImageModel data) {
+        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+        // MultipartBody.Part is used to send also the actual file name
+        String fileUrl=file.substring(file.lastIndexOf("/")+1);
+        if (fileUrl.indexOf(".") > 0)
+            fileUrl = fileUrl.substring(0, fileUrl.lastIndexOf("."));
+        Log.d("trans_id",data.getTrans_id());
+        Log.d("chk_id",fileUrl);
+        String[] fileName = fileUrl.split("-");
+        RequestBody trans_id =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"),  data.getTrans_id());
+        RequestBody chk_id =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"),  fileName[0]);
+        RequestBody dependent =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"),  fileName[1]);
+        RequestBody company =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), companyName);
+        RequestBody timestamp =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), data.getTimeStamp());
+
+        final RequestBody caption =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), data.getCaption());
+
+        MultipartBody.Part body=null;
+        if(!file.equals("")) {
+            File fileSend=new File(file);
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), fileSend);
+            body =MultipartBody.Part.createFormData("attachment", fileSend.getName(), requestFile);
+        }
+
+        Call<ErrorModel> call = apiInterface.saveImg(body,trans_id,company,chk_id, dependent, timestamp, caption);
+
+        call.enqueue(new Callback<ErrorModel>() {
+            @Override
+            public void onResponse(Call<ErrorModel> call, retrofit2.Response<ErrorModel> response) {
+                try {
+                    ErrorModel errorModels = (ErrorModel) response.body();
+                    if (errorModels.getError().equals("200")) {
+                        String timestamp1 = errorModels.getTimestamp();
+                        String filename = errorModels.getFileName();
+                        String caption = errorModels.getCaption();
+                        final String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                                + "/" + companyName + "/" + phonenumber + "/" + caption + "/" + timestamp1 + "/" + filename;
+                        File fdelete = new File(path);
+//                        count++;
+                        if (fdelete.exists()) {
+                            if (fdelete.delete()) {
+//                                surveyDb.deleteImageFile(imageModel.getTaskId(), imageModel.getSubTaskId(), timestamp1, imageModel.getCheckPointId());
+                            }
+                        }
+                    }
+//                    hasSentData = true;
+                }catch (Exception e){}
+            }
+
+            @Override
+            public void onFailure(Call<ErrorModel> call, Throwable t) {
+                Log.d("Falire", "onFailure: "+t.getLocalizedMessage());
+            }
+        });
+
+    }
 
 
 }

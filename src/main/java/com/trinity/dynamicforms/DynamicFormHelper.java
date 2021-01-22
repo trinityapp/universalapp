@@ -27,9 +27,9 @@ public class DynamicFormHelper {
     String role_id;
     String did;
     String tid;
-    String company, uniqueId;
+    String company, phoneNumber;
 
-    public DynamicFormHelper(Context context, MenuModel menu, int container, String base_url, String emp_id, String role_id, String did,String tid, String company) {
+    public DynamicFormHelper(Context context, MenuModel menu, int container, String base_url, String emp_id, String role_id, String did,String tid, String company, String phoneNumber) {
         this.context = context;
         this.menu = menu;
         this.container = container;
@@ -39,12 +39,13 @@ public class DynamicFormHelper {
         this.did = did;
         this.tid = tid;
         this.company = company;
+        this.phoneNumber = phoneNumber;
 //        this.uniqueId = uniqueId;
     }
 
 
     public void setFrameLayoutContainer(){
-        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did, menu, tid);
+        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did,company,phoneNumber, menu, tid);
         FragmentManager fragmentManager =((AppCompatActivity) context).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
@@ -53,7 +54,7 @@ public class DynamicFormHelper {
         fragmentTransaction.commit();
     }
     public Fragment getFragment(){
-        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did, menu, tid);
+        CategoryFragment fragobj = CategoryFragment.newInstance(base_url, emp_id, role_id,did,company,phoneNumber, menu, tid);
         return fragobj;
     }
 

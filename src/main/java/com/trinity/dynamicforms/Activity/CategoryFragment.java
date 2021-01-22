@@ -54,9 +54,10 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
     String role_id;
     String company;
     String tid;
+    String phoneNumber;
     CategoryTaskRecyclerAdapter onlycustomAdapter;
     onResponseEventListener eventListener;
-    public static CategoryFragment newInstance(String baseUrl, String emp_id, String role_id,String did, MenuModel menu, String tid) {
+    public static CategoryFragment newInstance(String baseUrl, String emp_id, String role_id,String did, String company, String phoneNumber,MenuModel menu, String tid) {
         CategoryFragment f = new CategoryFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constant.Base_url, baseUrl);
@@ -64,7 +65,11 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
         bundle.putString(Constant.RoleId, role_id);
         bundle.putString(Constant.Did,did );
         bundle.putString(Constant.Tid,tid );
-        bundle.putSerializable(Constant.Menu, menu.getMenu());
+        bundle.putString(Constant.Company, company);
+        bundle.putString(Constant.Mobile, phoneNumber);
+        if(menu != null) {
+            bundle.putSerializable(Constant.Menu, menu.getMenu());
+        }
         f.setArguments(bundle);
         return f;
     }
@@ -76,7 +81,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
         try {
             eventListener = (onResponseEventListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement onSomeEventListener");
+//            throw new ClassCastException(context.toString() + " must implement onSomeEventListener");
         }
     }
 
@@ -109,17 +114,29 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
         emp_id = intent.getString(Constant.Empid);
         role_id = intent.getString(Constant.RoleId);
         company = intent.getString(Constant.Company);
+        phoneNumber = intent.getString(Constant.Mobile);
         did = intent.getString(Constant.Did);
         tid = intent.getString(Constant.Tid);
         ArrayList<MenuDetailModel> menu = (ArrayList<MenuDetailModel>) intent.getSerializable(Constant.Menu);
-        if(menu != null) {
-            SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel(tid, menu);
-        }
-        viewModel = new CategoryViewModel(context, base_url, emp_id, role_id, tid,company, db);
+
+        viewModel = new CategoryViewModel(context, base_url, emp_id, role_id, tid,company,phoneNumber, db);
         SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Empid, emp_id);
         SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Did, did);
+        SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Company, company);
+        SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Mobile, phoneNumber);
         viewModel.getCheckList();
-        loadMenuData();
+        if(menu != null) {
+            SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel(tid, menu);
+            loadMenuData();
+        } else {
+            viewModel.getMenuDetails(new CategoryViewModel.OnShareMenuClickedListener() {
+                 @Override
+                public void menuSaved(Boolean isSuccess) {
+                     loadMenuData();
+                }
+            });
+        }
+
     }
 
     @Override
@@ -136,6 +153,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
     public void refreshData(){
         Log.d("Refresh","Refresh");
         viewModel.getCheckList();
+
 //        viewModel.getMenuDetails(new CategoryViewModel.OnShareMenuClickedListener() {
 //            @Override
 //            public void menuSaved(Boolean isSuccess) {
@@ -217,7 +235,9 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
 //                    refreshData();
                     if(Util.isConnected(context)) {
                         tappedOnUpload();
-                        eventListener.onApiResponse(true, tid);
+                        if(eventListener != null) {
+                            eventListener.onApiResponse(true, tid);
+                        }
                     } else {
                         loadOfflineMenuData();
                     }
@@ -226,7 +246,9 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
-                eventListener.onApiResponse(false, tid);
+                if(eventListener != null) {
+                    eventListener.onApiResponse(false, tid);
+                }
             }
         }
     }

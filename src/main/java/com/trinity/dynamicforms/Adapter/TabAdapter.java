@@ -1457,7 +1457,12 @@ public class TabAdapter extends PagerAdapter {
                         @Override
                         public void onCompletion(Location location, boolean canGetLatLong) {
                             dialog.dismiss();
-                            getCompleteAddressString(location.getLatitude(), location.getLongitude(), qustcontModel, editText);
+                                                        if(location != null) {
+                                getCompleteAddressString(location.getLatitude(), location.getLongitude(), qustcontModel, editText);
+                            } else {
+                                Toast.makeText(context, "Your gps is Off, Please switch on Gps", Toast.LENGTH_LONG).show();
+                            }
+
                         }
                     });
                 }

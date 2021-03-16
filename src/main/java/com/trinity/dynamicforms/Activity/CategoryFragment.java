@@ -180,7 +180,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
 //            _onlytaskrecyclerview.setNestedScrollingEnabled(false);
             GridLayoutManager onlylinearLayoutManager = new GridLayoutManager(context, 1);
             _onlytaskrecyclerview.setLayoutManager(onlylinearLayoutManager);
-            onlycustomAdapter = new CategoryTaskRecyclerAdapter(context, menu, menuHandler);
+            onlycustomAdapter = new CategoryTaskRecyclerAdapter(context, menu, menuHandler, base_url, emp_id, role_id);
             onlycustomAdapter.setOnShareClickedListener(new CategoryTaskRecyclerAdapter.OnShareClickedListener() {
                 @Override
                 public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId,String uniqueId, String isDataSend) {
@@ -268,7 +268,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
 //            _onlytaskrecyclerview.setNestedScrollingEnabled(false);
             GridLayoutManager onlylinearLayoutManager = new GridLayoutManager(context, 1);
             _onlytaskrecyclerview.setLayoutManager(onlylinearLayoutManager);
-            onlycustomAdapter = new CategoryTaskRecyclerAdapter(context, menu, menuHandler);
+            onlycustomAdapter = new CategoryTaskRecyclerAdapter(context, menu, menuHandler, base_url, emp_id, role_id );
             onlycustomAdapter.setOnShareClickedListener(new CategoryTaskRecyclerAdapter.OnShareClickedListener() {
                 @Override
                 public void ShareClicked(MenuDetailModel menu, String locationId, String mappingId, String distance, String assignId, String activityId, String uniqueId, String isDataSend) {

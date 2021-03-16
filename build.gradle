@@ -49,4 +49,6 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
     implementation 'com.crowdfire.cfalertdialog:cfalertdialog:1.1.0'
+
+    implementation project(':MapsLibrary')
 }

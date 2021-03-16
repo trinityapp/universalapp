@@ -1,6 +1,7 @@
 package com.trinity.dynamicforms.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Handler;
@@ -17,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.mapslibrary.MapsNewActivity;
 import com.trinity.dynamicforms.Models.MenuDetailModel;
 import com.trinity.dynamicforms.R;
 import com.trinity.dynamicforms.Utils.Alerts;
+import com.trinity.dynamicforms.Utils.SharedpreferenceUtility;
 import com.trinity.dynamicforms.Utils.Util;
 
 import java.util.ArrayList;
@@ -46,12 +49,20 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
     String mappingId = "0";
     final String distance = "";
     private long mLastClickTime = System.currentTimeMillis();
-    public CategoryTaskRecyclerAdapter(Context context, List<MenuDetailModel> menuList, Handler handler ) {
+    String base_url;
+    String emp_id;
+    String did;
+    String role_id;
+    public CategoryTaskRecyclerAdapter(Context context, List<MenuDetailModel> menuList, Handler handler ,String base_url, String emp_id, String role_id) {
         this.context = context;
         this.menuList=menuList;
         this.menuListSearch = new ArrayList<MenuDetailModel>();
         this.menuListSearch.addAll(menuList);
         this.handler = handler;
+        this.base_url = base_url;
+        this.emp_id = emp_id;
+        this.did = did;
+        this.role_id = role_id;
     }
 
     public void setOnShareClickedListener(OnShareClickedListener mCallback) {
@@ -89,7 +100,14 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                 @Override
                 public void onClick(View view) {
 //            Log.d("assignedModel",assignedModel.getGeoFence());
-//                    if (!assignedModel.getChpId().isEmpty()) {
+                    if (assignedModel.getCaption().equals("Maps")) {
+                        Intent intent = new Intent(context, MapsNewActivity.class);
+                        intent.putExtra("baseurl", base_url);
+                        intent.putExtra("empid", emp_id);
+                        intent.putExtra("roleid", role_id);
+                        intent.putExtra("aid", "3");
+                        context.startActivity(intent);
+                    } else {
                         long now = System.currentTimeMillis();
                         if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
                             return;
@@ -126,7 +144,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                         }
 
                     }
-//                }
+                }
 
             });
 

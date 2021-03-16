@@ -37,6 +37,7 @@
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
+        android:id="@+id/arrow"
         android:background="@android:color/transparent"
         android:src="@drawable/arrow_down_icon"></ImageButton>
 </RelativeLayout>

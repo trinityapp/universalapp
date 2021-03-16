@@ -238,9 +238,9 @@ public class TabAdapter extends PagerAdapter {
         prev = (Button) itemView.findViewById(R.id.prev);
         LinearLayout line = (LinearLayout) itemView.findViewById(R.id.lineView);
         line.setFocusable(true);
-//        if (ids.size() == 1) {
-//            submit.setText("Submit");
-//        }
+        if (ids.size() == 1) {
+            submit.setText("Submit");
+        }
         if (position == 0){
             prev.setVisibility(View.INVISIBLE);
         } else {
@@ -256,29 +256,33 @@ public class TabAdapter extends PagerAdapter {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (submit.getText().equals("Submit")) {
-                    showSubmitAlert();
-                } else {
-                    if (isDataSendArray != null) {
-                        if (!isDataSendArray[position].equals("0")) {
-                            setUpOnSubmit(position);
-                        } else {
-                            Savecheckpoint.clear();
-                            filledPages.put(position, true);
-                            setDoneTabView(position);
-                            loadedFirstTime = true;
-                            if (submit.getText().equals("Submit")) {
-                                showSubmitAlert();
-                            } else if (position < ids.size() - 1) {
-                                viewPager.setCurrentItem(position + 1);
-                            }
-                            if (position == ids.size() - 1) {
-                                submit.setText("Submit");
-                            }
-                        }
+                if(ids.size() > 1) {
+                    if (submit.getText().equals("Submit")) {
+                        showSubmitAlert();
                     } else {
-                        setUpOnSubmit(position);
+                        if (isDataSendArray != null) {
+                            if (!isDataSendArray[position].equals("0")) {
+                                setUpOnSubmit(position);
+                            } else {
+                                Savecheckpoint.clear();
+                                filledPages.put(position, true);
+                                setDoneTabView(position);
+                                loadedFirstTime = true;
+                                if (submit.getText().equals("Submit")) {
+                                    showSubmitAlert();
+                                } else if (position < ids.size() - 1) {
+                                    viewPager.setCurrentItem(position + 1);
+                                }
+                                if (position == ids.size() - 1) {
+                                    submit.setText("Submit");
+                                }
+                            }
+                        } else {
+                            setUpOnSubmit(position);
+                        }
                     }
+                } else {
+                    setUpOnSubmit(position);
                 }
             }
         });
@@ -513,8 +517,7 @@ public class TabAdapter extends PagerAdapter {
             View dyview = LayoutInflater.from(context).inflate(R.layout.edittext_layout, null);
             EditText editText = (EditText) dyview.findViewById(R.id.edittext);
             InputFilter[] inputfilters;
-            qustcontModel.setCorrect("[^.]"); //remove
-
+//            qustcontModel.setCorrect("[^+]");
             if (qustcontModel.getSize() != null && !qustcontModel.getSize().isEmpty()) {
                 inputfilters = new InputFilter[2];
                 inputfilters[0] = new InputFilter.LengthFilter(Integer.parseInt(qustcontModel.getSize()));
@@ -1411,6 +1414,14 @@ public class TabAdapter extends PagerAdapter {
                     startCaptureVedio(qustcontModel.getValue());
                 }
             });
+            showVedio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, VideoLandscapeActivity.class);
+                    intent.putExtra("url", qustcontModel.getAnswer());
+                    (context).startActivity(intent);
+                }
+            });
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -1458,7 +1469,7 @@ public class TabAdapter extends PagerAdapter {
                         @Override
                         public void onCompletion(Location location, boolean canGetLatLong) {
                             dialog.dismiss();
-                                                        if(location != null) {
+                            if(location != null) {
                                 getCompleteAddressString(location.getLatitude(), location.getLongitude(), qustcontModel, editText);
                             } else {
                                 Toast.makeText(context, "Your gps is Off, Please switch on Gps", Toast.LENGTH_LONG).show();

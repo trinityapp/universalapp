@@ -116,12 +116,11 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
         }
 
     private void onClickAction(MenuDetailModel assignedModel, final int position) {
-        if (assignedModel.getCaption().equals("Maps")) {
+        if (assignedModel.getCaption().equalsIgnoreCase("Maps")) {
             Intent intent = new Intent(context, MapsNewActivity.class);
             intent.putExtra("baseurl", base_url);
             intent.putExtra("empid", emp_id);
             intent.putExtra("roleid", role_id);
-            intent.putExtra("aid", "3");
             context.startActivity(intent);
         } else {
             long now = System.currentTimeMillis();

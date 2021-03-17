@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
@@ -715,5 +717,38 @@ public class Util {
         return combinedString;
     }
 
+    public static boolean isGoogleMapsInstalled(Context context) {
+        try {
+            ApplicationInfo info = context.getPackageManager()
+                    .getApplicationInfo("com.google.android.apps.maps", 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    public static void openMaps(String latlong, Context context){
+        if (Util.isGoogleMapsInstalled(context)) {
+            String latlongSplit[] = latlong.split(",");
+            if (!latlongSplit[0].equals("0")
+                    && !latlongSplit[0].equals("0.0")
+                    && !latlongSplit[1].equals("0")
+                    && !latlongSplit[1].equals("0.0")) {
+                String uriString = "http://maps.google.com/maps?daddr=" + latlongSplit[0] + "," + latlongSplit[1];
+                Uri uri = Uri.parse(uriString);
+                Intent intent = new Intent(
+                        Intent.ACTION_VIEW, uri);
+                context.startActivity(intent);
+            } else {
+                Toast.makeText(context,
+                        "Location Detail not found",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(context, "Google Map is not Installed",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
 }

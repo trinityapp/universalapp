@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -113,6 +115,22 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
             }
         });
 
+        if(assignedModel.getGeoCoordinate() == null){
+            holder.maps.setVisibility(View.GONE);
+        } else {
+            if (assignedModel.getGeoCoordinate().isEmpty()) {
+                holder.maps.setVisibility(View.GONE);
+            } else {
+                holder.maps.setVisibility(View.VISIBLE);
+            }
+        }
+
+        holder.maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.openMaps(assignedModel.getGeoCoordinate(), context);
+            }
+        });
         }
 
     private void onClickAction(MenuDetailModel assignedModel, final int position) {
@@ -170,8 +188,9 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
         public class MyViewHolder extends RecyclerView.ViewHolder {
             TextView taskName;
             RelativeLayout Layout_click;
-            ImageView icon;
+            ImageView icon, maps;
             ImageButton arrow;
+
             // ImageView img;
 
             public MyViewHolder(final View itemView) {
@@ -182,6 +201,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
                 Layout_click = itemView.findViewById(R.id.Layout_click);
                 icon = itemView.findViewById(R.id.icon);
                 arrow = itemView.findViewById(R.id.arrow);
+                maps = itemView.findViewById(R.id.map);
             }
         }
 
@@ -200,4 +220,6 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
         }
         notifyDataSetChanged();
     }
+
+
 }

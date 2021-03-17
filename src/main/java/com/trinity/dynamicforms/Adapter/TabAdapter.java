@@ -518,7 +518,7 @@ public class TabAdapter extends PagerAdapter {
             EditText editText = (EditText) dyview.findViewById(R.id.edittext);
             InputFilter[] inputfilters;
 //            qustcontModel.setCorrect("^[+]");
-//            qustcontModel.setCorrect("~#^|$%&*!");
+//            qustcontModel.setCorrect("~&!");
 
             if (qustcontModel.getSize() != null && !qustcontModel.getSize().isEmpty()) {
                 inputfilters = new InputFilter[2];

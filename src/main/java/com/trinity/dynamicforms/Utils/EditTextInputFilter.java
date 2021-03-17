@@ -32,6 +32,7 @@ public class EditTextInputFilter implements InputFilter {
             if (source != null && blockCharacters.contains(("" + source))) {
                 return "";
             }
+            return null;
         }
         return null;
     }

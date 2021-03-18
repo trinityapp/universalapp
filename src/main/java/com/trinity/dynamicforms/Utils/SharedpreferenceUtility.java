@@ -6,6 +6,7 @@ import android.content.SharedPreferences.Editor;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.trinity.dynamicforms.Models.MappingModel;
 import com.trinity.dynamicforms.Models.MenuDetailModel;
 
 import java.lang.reflect.Type;
@@ -184,6 +185,33 @@ public static String CUSTOMER_TYPE = "type";*/
             Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<MenuDetailModel>>() {}.getType();
             ArrayList<MenuDetailModel> array = gson.fromJson(lvalue,type);
+            return array;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void putArrayListMappingModel(String key, ArrayList<MappingModel> value) {
+        try {
+            mEditor = mPref.edit();
+            Gson gson = new Gson();
+            String inputString= gson.toJson(value);
+//            System.out.println("inputString= " + inputString);
+            mEditor.putString(key, inputString);
+            mEditor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public ArrayList<MappingModel> getArrayListMappingModel(String key) {
+        try {
+            String lvalue = mPref.getString(key, "");
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<MappingModel>>() {}.getType();
+            ArrayList<MappingModel> array = gson.fromJson(lvalue,type);
             return array;
         } catch (Exception e) {
             e.printStackTrace();

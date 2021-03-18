@@ -55,6 +55,6 @@ public class Constant {
     public static String SubCategoryTitle="SubCategoryTitle";
     public static String GroupChecklistKey="SubCategoryKey";
 //    public static String HasStarted="hasStarted";
-//    public static String MappingData="MappingData";
+    public static String MappingData="MappingData";
 
 }

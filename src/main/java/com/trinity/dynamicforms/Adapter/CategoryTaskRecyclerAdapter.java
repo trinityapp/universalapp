@@ -115,10 +115,10 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
             }
         });
 
-        if(assignedModel.getGeoCoordinate() == null){
+        if(assignedModel.getLatlong() == null){
             holder.maps.setVisibility(View.GONE);
         } else {
-            if (assignedModel.getGeoCoordinate().isEmpty()) {
+            if (assignedModel.getLatlong().isEmpty()) {
                 holder.maps.setVisibility(View.GONE);
             } else {
                 holder.maps.setVisibility(View.VISIBLE);
@@ -128,7 +128,7 @@ public class CategoryTaskRecyclerAdapter extends RecyclerView.Adapter<CategoryTa
         holder.maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Util.openMaps(assignedModel.getGeoCoordinate(), context);
+                Util.openMaps(assignedModel.getLatlong(), context);
             }
         });
         }

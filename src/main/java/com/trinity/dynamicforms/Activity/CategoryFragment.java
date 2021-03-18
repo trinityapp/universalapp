@@ -125,6 +125,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
         SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Company, company);
         SharedpreferenceUtility.getInstance(getContext()).putString(Constant.Mobile, phoneNumber);
         viewModel.getCheckList();
+        viewModel.getLocations();
         if(menu != null) {
             SharedpreferenceUtility.getInstance(context).putArrayListMenuCategoryModel(tid, menu);
             loadMenuData();
@@ -153,6 +154,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
     public void refreshData(){
         Log.d("Refresh","Refresh");
         viewModel.getCheckList();
+        viewModel.getLocations();
 
 //        viewModel.getMenuDetails(new CategoryViewModel.OnShareMenuClickedListener() {
 //            @Override

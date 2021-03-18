@@ -3,6 +3,7 @@ package com.trinity.dynamicforms.Api;
 import com.trinity.dynamicforms.Database.Model.CheckPointsModel;
 import com.trinity.dynamicforms.Database.Model.SaveDataModel;
 import com.trinity.dynamicforms.Models.ErrorModel;
+import com.trinity.dynamicforms.Models.MappingModel;
 import com.trinity.dynamicforms.Models.MenuModel;
 
 import java.util.ArrayList;
@@ -45,4 +46,7 @@ public interface ApiInterface {
     @Headers({"Accept: application/json"})
     @POST("saveCheckpoint.php")     // API's endpoints
     Call<ErrorModel> saveData(@Body List<SaveDataModel> data);
+
+    @GET("mapping.php?")     // API's endpoints
+    Call<ArrayList<MappingModel>> mappingData(@Query("empId") String empid);
 }

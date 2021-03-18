@@ -30,6 +30,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.trinity.dynamicforms.Database.Model.CheckPointsModel;
+import com.trinity.dynamicforms.Models.MappingModel;
 import com.trinity.dynamicforms.Models.MenuDetailModel;
 
 import java.io.File;
@@ -495,55 +496,55 @@ public class Util {
         return GpsStatus;
     }
 
-    public static void getDistance(final String[] locationId, Handler handler, Context context, final Double geoFence, Boolean hasGeofence, final DistanceHandler event){
+    public static void getDistance(final String[] locationId, Handler handler, final Context context, final Double geoFence, final Boolean hasGeofence, final DistanceHandler event){
 //        if(!geoCoordinate.equals("0") && !geoCoordinate.equals("")) {
-//            Util.setCompletionHandler(handler, 0, context, new Util.CompletionHandler() {
-//                @Override
-//                public void onCompletion(Location location, boolean canGetLatLong) {
-//                    if (canGetLatLong) {
-//                        boolean check = false;
-//                        ArrayList<MappingModel> mapList = SharedpreferenceUtility.getInstance(context).getArrayListMappingModel(Constant.MappingData);
-//                        if (mapList != null) {
-//                            for (String locationId : locationId) {
-//                                for (MappingModel mapping : mapList) {
-//                                    if (mapping.getLocationId().equals(locationId)) {
-//                                        String geoCoordinate = mapping.getLatlong();
-//                                        String latlong[] = geoCoordinate.split(",");
-//                                        if(latlong.length == 2) {
-//                                            Double lat = Double.parseDouble(latlong[0]);
-//                                            Double longi = Double.parseDouble(latlong[1]);
-//                                            Location second = new Location("");
-//                                            second.setLatitude(lat);
-//                                            second.setLongitude(longi);
-//                                            Float distance = location.distanceTo(second);
-//                                            if (hasGeofence) {
-//                                                if (distance <= geoFence) {
-//                                                    check = true;
-//                                                    event.onCompletion(true, locationId, mapping.getMappingId(), String.valueOf(distance), String.valueOf(lat), String.valueOf(longi));
-//                                                    break;
-//                                                }
-//                                            } else {
-//                                                check = true;
-//                                                event.onCompletion(true, locationId, mapping.getMappingId(), String.valueOf(distance), String.valueOf(lat), String.valueOf(longi));
-//                                                break;
-//                                            }
-//                                        } else {
-//                                            event.onCompletion(false, "", "0", "","","");
-//                                        }
-//                                    }
-//                                }
-//                                if(check){
-//                                    break;
-//                                }
-//                            }
-//                        }
-//
-//                        if (!check) {
+            Util.setCompletionHandler(handler, 0, context, new Util.CompletionHandler() {
+                @Override
+                public void onCompletion(Location location, boolean canGetLatLong) {
+                    if (canGetLatLong) {
+                        boolean check = false;
+                        ArrayList<MappingModel> mapList = SharedpreferenceUtility.getInstance(context).getArrayListMappingModel(Constant.MappingData);
+                        if (mapList != null) {
+                            for (String locationId : locationId) {
+                                for (MappingModel mapping : mapList) {
+                                    if (mapping.getLocationId().equals(locationId)) {
+                                        String geoCoordinate = mapping.getLatlong();
+                                        String latlong[] = geoCoordinate.split(",");
+                                        if(latlong.length == 2) {
+                                            Double lat = Double.parseDouble(latlong[0]);
+                                            Double longi = Double.parseDouble(latlong[1]);
+                                            Location second = new Location("");
+                                            second.setLatitude(lat);
+                                            second.setLongitude(longi);
+                                            Float distance = location.distanceTo(second);
+                                            if (hasGeofence) {
+                                                if (distance <= geoFence) {
+                                                    check = true;
+                                                    event.onCompletion(true, locationId, mapping.getMappingId(), String.valueOf(distance), String.valueOf(lat), String.valueOf(longi));
+                                                    break;
+                                                }
+                                            } else {
+                                                check = true;
+                                                event.onCompletion(true, locationId, mapping.getMappingId(), String.valueOf(distance), String.valueOf(lat), String.valueOf(longi));
+                                                break;
+                                            }
+                                        } else {
+                                            event.onCompletion(false, "", "0", "","","");
+                                        }
+                                    }
+                                }
+                                if(check){
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!check) {
                             event.onCompletion(false, "", "0", "","","");
-//                        }
-//                    }
-//                }
-//            });
+                        }
+                    }
+                }
+            });
 
     }
 

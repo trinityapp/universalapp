@@ -13,6 +13,7 @@ import com.trinity.dynamicforms.Database.Model.CheckPointsModel;
 import com.trinity.dynamicforms.Database.Model.SaveDataModel;
 import com.trinity.dynamicforms.Database.Model.SaveImageModel;
 import com.trinity.dynamicforms.Models.ErrorModel;
+import com.trinity.dynamicforms.Models.MappingModel;
 import com.trinity.dynamicforms.Models.MenuModel;
 import com.trinity.dynamicforms.Models.SaveChecklistModel;
 import com.trinity.dynamicforms.Service.ForegroundService;
@@ -111,6 +112,26 @@ public class CategoryViewModel {
             }
         });
     }
+
+    public void getLocations(){
+        Api.setHost(SharedpreferenceUtility.getInstance(context).getString(Constant.Base_url));
+        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+        Call<ArrayList<MappingModel>> call = apiInterface.mappingData(SharedpreferenceUtility.getInstance(context).getString(Constant.Empid));
+        call.enqueue(new Callback<ArrayList<MappingModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<MappingModel>> call, retrofit2.Response<ArrayList<MappingModel>> response) {
+                ArrayList<MappingModel> res=response.body();
+                Log.e("res activity", res.toString());
+                SharedpreferenceUtility.getInstance(context).putArrayListMappingModel(Constant.MappingData, res);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<MappingModel>> call, Throwable t) {
+//                Toast.makeText(context,"Please Try Again",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     public int getCount() {
         List<String> data = db.saveDataDao().get_timestamp();
         return  data.size();

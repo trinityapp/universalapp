@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -241,6 +242,7 @@ public class CategoryFragment extends Fragment implements SearchView.OnQueryText
                             eventListener.onApiResponse(true, tid);
                         }
                     } else {
+                        Toast.makeText(context, "Internet is not available", Toast.LENGTH_SHORT).show();
                         loadOfflineMenuData();
                     }
 

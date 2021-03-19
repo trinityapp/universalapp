@@ -18,21 +18,20 @@ public class EditTextInputFilter implements InputFilter {
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
         Matcher matcher=mPattern.matcher(source);
         if(!blockCharacters.isEmpty()) {
-//            if (!matcher.matches()) {
-//                String string = (source + "").replaceAll(blockCharacters, "");
-//                if (source.length() > 1) {
-//                    return (source + "").substring(0, source.length() - 1);
-//                } else {
-//                    return "";
-//                }
-//            } else {
-//                String string = (source + "").replaceAll(blockCharacters, "");
-//                return string;
-//            }
-            if (source != null && blockCharacters.contains(("" + source))) {
-                return "";
+            if (!matcher.matches()) {
+                String string = (source + "").replaceAll(blockCharacters, "");
+                if (source.length() > 1) {
+                    return (source + "").substring(0, source.length() - 1);
+                } else {
+                    return "";
+                }
+            } else {
+                String string = (source + "").replaceAll(blockCharacters, "");
+                return string;
             }
-            return null;
+//            if (source != null && blockCharacters.contains(("" + source))) {
+//                return "";
+//            }
         }
         return null;
     }

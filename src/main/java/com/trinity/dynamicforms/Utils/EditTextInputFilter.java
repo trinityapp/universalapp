@@ -25,13 +25,7 @@ public class EditTextInputFilter implements InputFilter {
                 } else {
                     return "";
                 }
-            } else {
-                String string = (source + "").replaceAll(blockCharacters, "");
-                return string;
             }
-//            if (source != null && blockCharacters.contains(("" + source))) {
-//                return "";
-//            }
         }
         return null;
     }

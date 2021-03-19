@@ -17,7 +17,7 @@
           android:background="@drawable/edittext_border_layout"
           android:paddingLeft="@dimen/_10sdp"
           android:paddingRight="@dimen/_10sdp"
-          android:inputType="numberDecimal"
+          android:inputType=""
           android:textColor="@android:color/black" />
    </LinearLayout>
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.trinity.dynamicforms.Api;
 
 import com.trinity.dynamicforms.Database.Model.CheckPointsModel;
 import com.trinity.dynamicforms.Database.Model.SaveDataModel;
+import com.trinity.dynamicforms.Models.ActivityModelResponse;
 import com.trinity.dynamicforms.Models.ErrorModel;
 import com.trinity.dynamicforms.Models.MappingModel;
 import com.trinity.dynamicforms.Models.MenuModel;
@@ -49,4 +50,7 @@ public interface ApiInterface {
 
     @GET("mapping.php?")     // API's endpoints
     Call<ArrayList<MappingModel>> mappingData(@Query("empId") String empid);
+
+    @POST("activity.php")
+    Call<ActivityModelResponse> activity(@Body SaveDataModel data) ;
 }

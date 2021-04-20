@@ -29,7 +29,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.trinity.dynamicforms.Api.Api;
+import com.trinity.dynamicforms.Api.ApiInterface;
+import com.trinity.dynamicforms.Database.Database;
 import com.trinity.dynamicforms.Database.Model.CheckPointsModel;
+import com.trinity.dynamicforms.Database.Model.SaveDataModel;
+import com.trinity.dynamicforms.Models.ActivityModelResponse;
 import com.trinity.dynamicforms.Models.MappingModel;
 import com.trinity.dynamicforms.Models.MenuDetailModel;
 
@@ -42,6 +47,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class Util {
 
@@ -646,36 +654,36 @@ public class Util {
         return  level;
     }
 
-//    public static void activityCall(String event, Context context, String M_id, String locationId, String mappingId, String distance, String latlong, InfieldV5Db db){
-//        ActivityModel model = new ActivityModel();
-//        model.setEvent(event);
-//        model.setLatlong(latlong);
-//        model.setMobile_time(Util.calculateMobileTime());
-//        model.setM_id(M_id);
-//        model.setEmp_id(SharedpreferenceUtility.getInstance(context).getString(Constant.Empid));
-//        model.setLocationId(locationId);
-//        model.setDistance(distance);
-//        model.setMappingId(mappingId);
-//        model.setDid(SharedpreferenceUtility.getInstance(context).getString(Constant.Did));
-//        Api.setHost(SharedpreferenceUtility.getInstance(context).getString(Constant.Base_url));
-//        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-//        Call<ActivityModelResponse> call = apiInterface.sendActivity(model);
-//        call.enqueue(new Callback<ActivityModelResponse>() {
-//            @Override
-//            public void onResponse(Call<ActivityModelResponse> call, retrofit2.Response<ActivityModelResponse> response) {
-//                ActivityModelResponse res=response.body();
-////                                Log.e("res activity", res.toString());
-//                if(!res.getStatus().equals("success")){
-//                    Toast.makeText(context,res.getStatus(),Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ActivityModelResponse> call, Throwable t) {
-//                db.insertActivityValues(model, db);
-//            }
-//        });
-//    }
+    public static void activityCall(String event, final Context context, String M_id, String locationId, String mappingId, String distance, String latlong, final Database db){
+        final SaveDataModel model = new SaveDataModel();
+        model.setEvent(event);
+        model.setGeolocation(latlong);
+        model.setMobiledatetime(Util.calculateMobileTime());
+        model.setM_Id(M_id);
+        model.setEmp_id(SharedpreferenceUtility.getInstance(context).getString(Constant.Empid));
+        model.setLocationId(locationId);
+        model.setDistance(distance);
+        model.setMappingId(mappingId);
+        model.setDid(SharedpreferenceUtility.getInstance(context).getString(Constant.Did));
+        Api.setHost(SharedpreferenceUtility.getInstance(context).getString(Constant.Base_url));
+        ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
+        Call<ActivityModelResponse> call = apiInterface.activity(model);
+        call.enqueue(new Callback<ActivityModelResponse>() {
+            @Override
+            public void onResponse(Call<ActivityModelResponse> call, retrofit2.Response<ActivityModelResponse> response) {
+                ActivityModelResponse res=response.body();
+//                                Log.e("res activity", res.toString());
+                if(!res.getStatus().equals("success")){
+                    Toast.makeText(context,res.getStatus(),Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ActivityModelResponse> call, Throwable t) {
+                db.saveDataDao().insertAll(model);
+            }
+        });
+    }
 
      public static ArrayList<CheckPointsModel> shuffleCheckpointsGenerator(ArrayList<CheckPointsModel> set){
          ArrayList<CheckPointsModel> solution = new ArrayList<>();

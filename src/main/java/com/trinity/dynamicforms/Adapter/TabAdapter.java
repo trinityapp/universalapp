@@ -184,7 +184,7 @@ public class TabAdapter extends PagerAdapter {
         if (isDataSend != null) {
             this.isDataSendArray = isDataSend.split(":");
         }
-//        Util.activityCall("open", context, M_Id,locationId,mappingId, distance, latlong,infieldV5Db);
+        Util.activityCall("open", context, M_Id,locationId,mappingId, distance, latlong,db);
 
         for (int i = 0; i < groupIDs.length; i++) {
             String[] checkpoints = groupIDs[i].split(",");

@@ -66,9 +66,13 @@ public class ViewPagerForms extends AppCompatActivity {
         String activityId = intent.getStringExtra("activityId");
         String uniqueId = intent.getStringExtra("uniqueId");
         String isDataSend = intent.getStringExtra("isDataSend");
+
+
         if(menuDetail.getValue() != null){
+            //To be reviewed data
             checkListModels = setupCheckpoints(menuDetail.getValue());
         } else {
+            //To be shown data
             List<CheckPointsModel> list = db.checkpointsDao().getAll();
             checkListModels = new HashMap<>();
             for (CheckPointsModel str : list) {
